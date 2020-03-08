@@ -13,7 +13,7 @@ import { MatOptionModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { SplitPageComponent } from "./split-page/split-page.component";
 import { FirstPageComponent } from "./first-page/first-page.component";
-import { UserInfoComponent } from './user-info/user-info.component';
+import { UserInfoComponent } from "./user-info/user-info.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

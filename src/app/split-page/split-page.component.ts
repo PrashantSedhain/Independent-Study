@@ -8,12 +8,52 @@ import { Component, OnInit } from "@angular/core";
 export class SplitPageComponent implements OnInit {
   selected: Number;
   list: number[] = [];
-
-  createArray(n: number): any[] {
-    return Array(n);
-  }
-
+  test: boolean;
   constructor() {}
 
   ngOnInit() {}
+
+  public createArray() {
+    this.list = [];
+    if (this.selected == 1) {
+      this.list.push(1);
+      return this.list;
+    }
+    if (this.selected == 2) {
+      this.list.push(1);
+      this.list.push(1);
+      return this.list;
+    }
+    if (this.selected == 3) {
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      return this.list;
+    }
+    if (this.selected == 4) {
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      return this.list;
+    }
+    if (this.selected == 5) {
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+
+      this.list.push(1);
+      return this.list;
+    }
+    if (this.selected == 6) {
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      this.list.push(1);
+      return this.list;
+    }
+  }
 }
