@@ -1,12 +1,17 @@
 <div class="container">
   <h2 class="header">How many people do you want to split the expense with?</h2>
   <mat-form-field>
-    <mat-label>Select an option</mat-label>
-    <mat-select [(value)]="selected">
+    <mat-label>Please Select</mat-label>
+    <mat-select [(value)]="selected" (onModelChange)="createArray(selected)">
       <mat-option>None</mat-option>
-      <mat-option value="option1">Option 1</mat-option>
-      <mat-option value="option2">Option 2</mat-option>
-      <mat-option value="option3">Option 3</mat-option>
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      <mat-option value="4">4</mat-option>
+      <mat-option value="5">5</mat-option>
+      <mat-option value="6">6</mat-option>
     </mat-select>
   </mat-form-field>
+
+  <app-user-info *ngFor=""></app-user-info>
 </div>

@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-split-page',
-  templateUrl: './split-page.component.html',
-  styleUrls: ['./split-page.component.css']
+  selector: "app-split-page",
+  templateUrl: "./split-page.component.html",
+  styleUrls: ["./split-page.component.css"]
 })
 export class SplitPageComponent implements OnInit {
+  selected: Number;
+  list: number[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  createArray(n: number): any[] {
+    return Array(n);
   }
 
+  constructor() {}
+
+  ngOnInit() {}
 }
