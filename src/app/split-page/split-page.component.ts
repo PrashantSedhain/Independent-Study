@@ -6,14 +6,16 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./split-page.component.css"]
 })
 export class SplitPageComponent implements OnInit {
+  constructor() {}
   selected: Number;
   list: number[] = [];
   test: boolean;
-  constructor() {}
+  users: Person[] = [];
 
   ngOnInit() {}
 
   public createArray() {
+    this.test = true;
     this.list = [];
     if (this.selected == 1) {
       this.list.push(1);
@@ -56,4 +58,8 @@ export class SplitPageComponent implements OnInit {
       return this.list;
     }
   }
+}
+export interface Person {
+  fullName: string;
+  email: string;
 }

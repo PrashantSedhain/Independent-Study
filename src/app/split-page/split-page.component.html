@@ -12,6 +12,10 @@
       <mat-option value="6">6</mat-option>
     </mat-select>
   </mat-form-field>
+  <h2 *ngIf="test" class="header">
+    Please enter their information below:
+  </h2>
+
   <div>
     <app-user-info *ngFor="let item of list"></app-user-info>
   </div>
