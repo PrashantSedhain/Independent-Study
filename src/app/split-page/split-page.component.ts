@@ -58,6 +58,10 @@ export class SplitPageComponent implements OnInit {
       return this.list;
     }
   }
+
+  addUser() {
+    this.users.push({ fullName:"", email: "" });
+  }
 }
 export interface Person {
   fullName: string;
