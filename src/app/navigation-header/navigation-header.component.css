@@ -5,10 +5,10 @@
 
 .bg {
   /* The image used */
-  background-image: url("../../assets/home.jpg");
+  background-image: url("../../assets/brooke-lark-08bOYnH_r_E-unsplash.jpg");
 
   /* Full height */
-  height: 95.2%; 
+  height: 92.6%;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -16,12 +16,10 @@
   background-size: cover;
 }
 
-.button
-{
+.button {
   width: 150px;
   text-align: center;
-  margin:0 auto;
-
+  margin: 0 auto;
 }
 
 .container {
