@@ -5,7 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavigationHeaderComponent } from "./navigation-header/navigation-header.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatFormFieldModule } from "@angular/material";
+import { MatFormFieldModule, MatCheckboxModule } from "@angular/material";
 import { MatInputModule } from "@angular/material";
 import { MatRippleModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material";
@@ -25,6 +25,7 @@ import { InputPageComponent } from "./input-page/input-page.component";
   ],
   imports: [
     BrowserModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,

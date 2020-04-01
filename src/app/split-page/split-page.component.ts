@@ -6,6 +6,12 @@ import {
   Validators
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
+import { CalculationService } from "../calculation.service";
+
+interface Person {
+  fullName: string;
+  email: string;
+}
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -27,11 +33,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./split-page.component.css"]
 })
 export class SplitPageComponent implements OnInit {
-  constructor() {}
+  constructor(private calculationService: CalculationService) {}
   selected: Number;
   list: number[] = [];
   test: boolean;
   users: Person[] = [];
+  singleUser: Person;
+  nameArray: any = [];
+  emailArray: any = [];
+
   emailFormControl = new FormControl("", [
     Validators.required,
     Validators.email
@@ -86,10 +96,16 @@ export class SplitPageComponent implements OnInit {
   }
 
   addUser() {
-    this.users.push({ fullName:"", email: "" });
+    for (let i = 0; i < this.nameArray.length; i++) {
+      const singleUser: Person = {
+        fullName: this.nameArray[i],
+        email: this.emailArray[i]
+      };
+      this.users.push(singleUser);
+    }
+
+    this.nameArray = [];
+    this.emailArray = [];
+    this.calculationService.users = this.users;
   }
-}
-export interface Person {
-  fullName: string;
-  email: string;
 }
