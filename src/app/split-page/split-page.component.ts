@@ -8,9 +8,14 @@ import {
 import { ErrorStateMatcher } from "@angular/material/core";
 import { CalculationService } from "../calculation.service";
 
+interface OweTable {
+  owes: Record<string, Number>;
+}
+
 interface Person {
   fullName: string;
   email: string;
+  owes: OweTable[];
 }
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -99,7 +104,8 @@ export class SplitPageComponent implements OnInit {
     for (let i = 0; i < this.nameArray.length; i++) {
       const singleUser: Person = {
         fullName: this.nameArray[i],
-        email: this.emailArray[i]
+        email: this.emailArray[i],
+        owes: []
       };
       this.users.push(singleUser);
     }
@@ -107,5 +113,6 @@ export class SplitPageComponent implements OnInit {
     this.nameArray = [];
     this.emailArray = [];
     this.calculationService.users = this.users;
+    console.log(this.calculationService.newPerson);
   }
 }

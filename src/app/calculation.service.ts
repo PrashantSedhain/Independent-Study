@@ -1,8 +1,13 @@
 import { Injectable } from "@angular/core";
 
+interface OweTable {
+  owes: Record<string, Number>;
+}
+
 interface Person {
   fullName: string;
   email: string;
+  oweTable: OweTable[];
 }
 
 @Injectable({
@@ -13,5 +18,13 @@ export class CalculationService {
   nameArray: any = [];
   emailArray: any = [];
 
-  constructor() {}
+  newPerson: OweTable = {
+    owes: {
+      prashant: 100
+    }
+  };
+
+  constructor() {
+    console.log(this.newPerson);
+  }
 }
