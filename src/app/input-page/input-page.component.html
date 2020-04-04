@@ -5,19 +5,20 @@
     placeholder="HEB Shopping"
     type="text"
     id="example-number-input"
+    [(ngModel)]="titleOfExpense"
   />
   <h2 class="header">Enter the amount paid below:</h2>
   <input
     class="form-control"
     type="number"
-    value="42"
+    [(ngModel)]="amountPaid"
     id="example-number-input"
   />
   <h2 class="header">Paid by:</h2>
   <mat-form-field>
     <mat-label>Please Select</mat-label>
     <mat-select [(ngModel)]="userWhoPaid">
-      <mat-option *ngFor="let user of users" value="user.fullName"
+      <mat-option *ngFor="let user of users" value="{{ user.fullName }}"
         >{{ user.fullName }}
       </mat-option>
     </mat-select>
@@ -25,13 +26,22 @@
 
   <h2 class="exclude">Exclude:</h2>
   <section class="example-section">
-    <mat-checkbox class="example-margin" *ngFor="let user of users">{{
-      user.fullName
-    }}</mat-checkbox>
+    <mat-checkbox
+      class="example-margin"
+      *ngFor="let user of users; let i = index"
+      value="{{ user.fullName }}"
+      [(ngModel)]="user.checked"
+      >{{ user.fullName }}</mat-checkbox
+    >
   </section>
   <br />
   <br />
-  <button (click)="addUser()" routerLink="" type="button" class="btn btn-light">
+  <button
+    (click)="onAddExpense()"
+    routerLink=""
+    type="button"
+    class="btn btn-light"
+  >
     Add Expense
   </button>
 </div>

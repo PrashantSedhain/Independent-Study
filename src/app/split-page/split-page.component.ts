@@ -3,19 +3,15 @@ import {
   FormControl,
   FormGroupDirective,
   NgForm,
-  Validators
+  Validators,
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { CalculationService } from "../calculation.service";
 
-interface OweTable {
-  owes: Record<string, Number>;
-}
-
 interface Person {
   fullName: string;
   email: string;
-  owes: OweTable[];
+  owes: {};
 }
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -35,7 +31,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: "app-split-page",
   templateUrl: "./split-page.component.html",
-  styleUrls: ["./split-page.component.css"]
+  styleUrls: ["./split-page.component.css"],
 })
 export class SplitPageComponent implements OnInit {
   constructor(private calculationService: CalculationService) {}
@@ -49,7 +45,7 @@ export class SplitPageComponent implements OnInit {
 
   emailFormControl = new FormControl("", [
     Validators.required,
-    Validators.email
+    Validators.email,
   ]);
 
   matcher = new MyErrorStateMatcher();
@@ -105,7 +101,7 @@ export class SplitPageComponent implements OnInit {
       const singleUser: Person = {
         fullName: this.nameArray[i],
         email: this.emailArray[i],
-        owes: []
+        owes: {},
       };
       this.users.push(singleUser);
     }

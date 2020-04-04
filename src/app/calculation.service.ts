@@ -1,27 +1,28 @@
 import { Injectable } from "@angular/core";
 
-interface OweTable {
-  owes: Record<string, Number>;
-}
-
 interface Person {
   fullName: string;
   email: string;
-  oweTable: OweTable[];
+  owes: {};
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class CalculationService {
-  users: Person[] = [];
+  
+  titleOfExpense: String;
+  userWhoPaid: String;
+  amountPaid: Number;
+  excludedPersons: any = [];
+  users: Person[];
   nameArray: any = [];
   emailArray: any = [];
 
-  newPerson: OweTable = {
-    owes: {
-      prashant: 100
-    }
+  newPerson: Person = {
+    fullName: "Prashant Sedhain",
+    email: "prashantased@gmail.com",
+    owes: {},
   };
 
   constructor() {
