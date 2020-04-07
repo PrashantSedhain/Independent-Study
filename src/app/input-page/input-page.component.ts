@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CalculationService } from "../calculation.service";
-import { StickyDirection } from "@angular/cdk/table";
+
 interface Person {
   fullName: string;
   email: string;
@@ -33,9 +33,10 @@ export class InputPageComponent implements OnInit {
     console.log(this.excludedPersons);
     console.log(this.userWhoPaid);
     console.log("Amount paid is " + this.amountPaid);
-    this.users = this.calculationService.titleOfExpense;
-    this.users = this.calculationService.excludedPersons;
-    this.users = this.calculationService.userWhoPaid;
-    this.users = this.calculationService.amountPaid;
+    this.calculationService.titleOfExpense = this.titleOfExpense;
+    this.calculationService.excludedPersons = this.excludedPersons;
+    this.calculationService.userWhoPaid = this.userWhoPaid;
+    this.calculationService.amountPaid = this.amountPaid;
+    this.calculationService.performCalculation();
   }
 }
