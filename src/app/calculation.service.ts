@@ -36,8 +36,24 @@ export class CalculationService {
     const amountOwed = this.amountPaid / divNumber;
     const test = this.userWhoPaid;
     this.users.forEach((user) => {
+      var isExcluded = false;
+
       if (user.fullName != this.userWhoPaid) {
-        user.owes[this.userWhoPaid.toString()] += amountOwed;
+        if (this.excludedPersons != null) {
+          this.excludedPersons.forEach((excludedPerson) => {
+            if (excludedPerson == user.fullName) {
+              isExcluded = true;
+            }
+          });
+        }
+        if (isExcluded == false) {
+          if (user.owes[this.userWhoPaid.toString()] != null) {
+            var value = user.owes[this.userWhoPaid.toString()];
+            user.owes[this.userWhoPaid.toString()] = amountOwed + value;
+          } else {
+            user.owes[this.userWhoPaid.toString()] = amountOwed;
+          }
+        }
       }
     });
     console.log(this.users);

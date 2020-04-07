@@ -5,7 +5,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavigationHeaderComponent } from "./navigation-header/navigation-header.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatFormFieldModule, MatCheckboxModule } from "@angular/material";
+import {
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatSnackBarModule,
+} from "@angular/material";
 import { MatInputModule } from "@angular/material";
 import { MatRippleModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material";
@@ -21,7 +25,7 @@ import { InputPageComponent } from "./input-page/input-page.component";
     NavigationHeaderComponent,
     SplitPageComponent,
     FirstPageComponent,
-    InputPageComponent
+    InputPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,16 +40,17 @@ import { InputPageComponent } from "./input-page/input-page.component";
     MatRippleModule,
     MatOptionModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    MatSnackBarModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
