@@ -2,22 +2,24 @@
   <h2 class="header">Enter the title:</h2>
   <input
     class="form-control"
-    placeholder="HEB Shopping"
+    placeholder="Ex: HEB Shopping"
     type="text"
     id="example-number-input"
+    name="titleOfExpense"
     [(ngModel)]="titleOfExpense"
   />
   <h2 class="header">Enter the amount paid below:</h2>
   <input
     class="form-control"
     type="number"
+    name="amountPaid"
     [(ngModel)]="amountPaid"
     id="example-number-input"
   />
   <h2 class="header">Paid by:</h2>
   <mat-form-field>
     <mat-label>Please Select</mat-label>
-    <mat-select [(ngModel)]="userWhoPaid">
+    <mat-select [(ngModel)]="userWhoPaid" name="userWhoPaid">
       <mat-option *ngFor="let user of users" value="{{ user.fullName }}"
         >{{ user.fullName }}
       </mat-option>

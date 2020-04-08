@@ -22,16 +22,26 @@ export class CalculationService {
   users: Person[];
   nameArray: any = [];
   emailArray: any = [];
-
-  newPerson: Person = {
-    fullName: "Prashant Sedhain",
-    email: "prashantased@gmail.com",
-    owes: {},
-  };
+  totalReport: Report[] = [];
 
   constructor() {}
 
+  findExcludedPersonsAsArray(): string {
+    var excludedPersonAsString = "";
+    var i = 0;
+    this.excludedPersons.forEach((element) => {
+      if (i > 0) {
+        excludedPersonAsString += ", ";
+      }
+      excludedPersonAsString += element;
+      i++;
+    });
+
+    return excludedPersonAsString;
+  }
   performCalculation() {
+    //add the expense to report for report generation.
+    var exPersonAsString: string = "None";
     const divNumber = this.users.length - this.excludedPersons.length;
     const amountOwed = this.amountPaid / divNumber;
     const test = this.userWhoPaid;
@@ -39,8 +49,9 @@ export class CalculationService {
       var isExcluded = false;
 
       if (user.fullName != this.userWhoPaid) {
-        if (this.excludedPersons != null) {
-          this.excludedPersons.forEach((excludedPerson) => {
+        if (this.excludedPersons.length != 0) {
+          exPersonAsString = this.findExcludedPersonsAsArray();
+          this.excludedPersons.forEach((excludedPerson: string) => {
             if (excludedPerson == user.fullName) {
               isExcluded = true;
             }
@@ -56,6 +67,13 @@ export class CalculationService {
         }
       }
     });
+    var item: Report = {
+      title: this.titleOfExpense,
+      excludedPerson: exPersonAsString,
+      amountPaid: this.amountPaid,
+      paidBy: this.userWhoPaid,
+    };
+    this.totalReport.push(item);
     console.log(this.users);
   }
 }

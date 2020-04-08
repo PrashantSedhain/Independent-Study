@@ -109,6 +109,5 @@ export class SplitPageComponent implements OnInit {
     this.nameArray = [];
     this.emailArray = [];
     this.calculationService.users = this.users;
-    console.log(this.calculationService.newPerson);
   }
 }

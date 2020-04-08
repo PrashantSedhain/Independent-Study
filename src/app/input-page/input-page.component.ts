@@ -38,6 +38,16 @@ export class InputPageComponent implements OnInit {
       duration: 4000,
     });
   }
+
+  clearFields() {
+    this.amountPaid = 0;
+    this.userWhoPaid = "";
+    this.titleOfExpense = "";
+
+    this.users.forEach((element) => {
+      element.checked = false;
+    });
+  }
   onAddExpense() {
     this.excludedPersons = this.selectedOptions();
     console.log(this.titleOfExpense);
@@ -51,5 +61,6 @@ export class InputPageComponent implements OnInit {
     this.calculationService.performCalculation();
     this.router.navigate(["/inputPage"]);
     this.openSnackBar("Expense added successfully", "Done");
+    this.clearFields();
   }
 }
