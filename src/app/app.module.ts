@@ -18,6 +18,7 @@ import { MatSelectModule } from "@angular/material";
 import { SplitPageComponent } from "./split-page/split-page.component";
 import { FirstPageComponent } from "./first-page/first-page.component";
 import { InputPageComponent } from "./input-page/input-page.component";
+import { FinishPageComponent } from './finish-page/finish-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { InputPageComponent } from "./input-page/input-page.component";
     SplitPageComponent,
     FirstPageComponent,
     InputPageComponent,
+    FinishPageComponent,
   ],
   imports: [
     BrowserModule,
