@@ -76,4 +76,6 @@ export class CalculationService {
     this.totalReport.push(item);
     console.log(this.users);
   }
+
+  performFinalCalculation() {}
 }
