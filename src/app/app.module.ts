@@ -16,18 +16,18 @@ import { MatButtonModule } from "@angular/material";
 import { MatOptionModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { SplitPageComponent } from "./split-page/split-page.component";
-import { FirstPageComponent } from "./first-page/first-page.component";
 import { InputPageComponent } from "./input-page/input-page.component";
-import { FinishPageComponent } from './finish-page/finish-page.component';
+import { FinishPageComponent } from "./finish-page/finish-page.component";
+import { LandingPageComponent } from "./landing-page/landing-page.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationHeaderComponent,
     SplitPageComponent,
-    FirstPageComponent,
     InputPageComponent,
     FinishPageComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,

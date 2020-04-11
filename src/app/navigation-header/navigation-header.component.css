@@ -1,22 +1,4 @@
-#brand {
-  font-family: "Berkshire Swash";
-  font-size: 30px;
-}
-
-.bg {
-  /* The image used */
-  background-image: url("../../assets/brooke-lark-08bOYnH_r_E-unsplash.jpg");
-
-  /* Full height */
-  height: 92.6%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.button {
+/* .button {
   width: 150px;
   text-align: center;
   margin: 0 auto;
@@ -51,4 +33,21 @@
 
 .container .btn:hover {
   background-color: black;
+} */
+
+.social-part .fa {
+  padding-right: 20px;
+}
+ul li a {
+  margin-right: 20px;
+}
+
+.carousel-item {
+  height: 100vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
