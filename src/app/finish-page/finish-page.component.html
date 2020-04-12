@@ -24,4 +24,11 @@
       <button type="button" class="btn btn-link">Delete</button>
     </tr>
   </tbody>
+  <tfoot>
+    <tr colspan="6" *ngFor="let item of finalOutputArray">
+      {{
+        item
+      }}
+    </tr>
+  </tfoot>
 </table>

@@ -77,7 +77,7 @@ export class CalculationService {
     console.log(this.users);
   }
 
-  performFinalCalculation() {
+  performFinalCalculation(): [] {
     var i = 0;
     var j = 0;
     for (i = 0; i < this.users.length; i++) {
@@ -147,6 +147,6 @@ export class CalculationService {
         }
       }
     }
-    console.log(this.finalOutputArray);
+    return this.finalOutputArray;
   }
 }

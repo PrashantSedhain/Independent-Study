@@ -13,11 +13,12 @@ interface Report {
 })
 export class FinishPageComponent implements OnInit {
   totalReport: Report[] = [];
+  finalOutputArray: [] = [];
   constructor(private calculationService: CalculationService) {}
 
   ngOnInit() {
     this.totalReport = this.calculationService.totalReport;
     //console.log(this.totalReport);
-    this.calculationService.performFinalCalculation();
+    this.finalOutputArray = this.calculationService.performFinalCalculation();
   }
 }
