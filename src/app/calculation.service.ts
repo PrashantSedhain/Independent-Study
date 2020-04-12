@@ -23,7 +23,7 @@ export class CalculationService {
   nameArray: any = [];
   emailArray: any = [];
   totalReport: Report[] = [];
-
+  finalOutputArray: any = [];
   constructor() {}
 
   findExcludedPersonsAsArray(): string {
@@ -77,5 +77,76 @@ export class CalculationService {
     console.log(this.users);
   }
 
-  performFinalCalculation() {}
+  performFinalCalculation() {
+    var i = 0;
+    var j = 0;
+    for (i = 0; i < this.users.length; i++) {
+      var name = this.users[i].fullName;
+      for (j = i + 1; j < this.users.length; j++) {
+        var usrName = this.users[j].fullName;
+        if (
+          this.users[i].owes[usrName] == null &&
+          this.users[j].owes[name] == null
+        ) {
+          var output =
+            "No transaction between " +
+            this.users[i].fullName +
+            " and " +
+            this.users[j].fullName;
+          this.finalOutputArray.push(output);
+        } else if (this.users[i].owes[usrName] == null) {
+          var output =
+            this.users[j].fullName +
+            " owes " +
+            this.users[i].fullName +
+            " " +
+            this.users[j].owes[name] +
+            " dollars";
+
+          this.finalOutputArray.push(output);
+        } else if (this.users[j].owes[name] == null) {
+          var output =
+            this.users[i].fullName +
+            " owes " +
+            this.users[j].fullName +
+            " " +
+            this.users[i].owes[usrName] +
+            " dollars";
+          this.finalOutputArray.push(output);
+        } else {
+          if (this.users[i].owes[usrName] > this.users[j].owes[name]) {
+            var moneyToPay =
+              this.users[i].owes[usrName] - this.users[j].owes[name];
+            var output =
+              this.users[i].fullName +
+              " owes " +
+              this.users[j].fullName +
+              " " +
+              moneyToPay +
+              " dollars";
+            this.finalOutputArray.push(output);
+          } else if (this.users[i].owes[usrName] == this.users[j].owes[name]) {
+            var output =
+              "Account is balanced between " +
+              this.users[i].fullName +
+              " and " +
+              this.users[j].fullName;
+            this.finalOutputArray.push(output);
+          } else if (this.users[i].owes[usrName] < this.users[j].owes[name]) {
+            var moneyToPay =
+              this.users[j].owes[name] - this.users[i].owes[usrName];
+            var output =
+              this.users[j].fullName +
+              " owes " +
+              this.users[i].fullName +
+              " " +
+              moneyToPay +
+              " dollars";
+            this.finalOutputArray.push(output);
+          }
+        }
+      }
+    }
+    console.log(this.finalOutputArray);
+  }
 }

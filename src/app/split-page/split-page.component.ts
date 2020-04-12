@@ -35,6 +35,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SplitPageComponent implements OnInit {
   constructor(private calculationService: CalculationService) {}
+  enableButton: boolean = false;
   selected: Number;
   list: number[] = [];
   test: boolean;

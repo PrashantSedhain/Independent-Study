@@ -17,6 +17,7 @@ export class FinishPageComponent implements OnInit {
 
   ngOnInit() {
     this.totalReport = this.calculationService.totalReport;
-    console.log(this.totalReport);
+    //console.log(this.totalReport);
+    this.calculationService.performFinalCalculation();
   }
 }

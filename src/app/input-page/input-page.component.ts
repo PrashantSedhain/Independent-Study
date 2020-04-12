@@ -61,6 +61,7 @@ export class InputPageComponent implements OnInit {
     this.calculationService.performCalculation();
     this.router.navigate(["/inputPage"]);
     this.openSnackBar("Expense added successfully", "Done");
+    
     this.clearFields();
   }
 }
