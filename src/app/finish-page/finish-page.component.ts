@@ -16,10 +16,13 @@ export class FinishPageComponent implements OnInit {
   finalOutputArray: [] = [];
   constructor(private calculationService: CalculationService) {}
 
+  sendEmails() {
+    this.calculationService.sendEmails();
+  }
+
   ngOnInit() {
     this.totalReport = this.calculationService.totalReport;
     //console.log(this.totalReport);
     this.finalOutputArray = this.calculationService.performFinalCalculation();
-    this.calculationService.sendEmails();
   }
 }
