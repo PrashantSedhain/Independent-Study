@@ -5,6 +5,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavigationHeaderComponent } from "./navigation-header/navigation-header.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from "@angular/common/http";
+
 import {
   MatFormFieldModule,
   MatCheckboxModule,
@@ -41,6 +43,7 @@ import { LandingPageComponent } from "./landing-page/landing-page.component";
     MatInputModule,
     MatRippleModule,
     MatOptionModule,
+    HttpClientModule,
     MatSelectModule,
     MatSnackBarModule,
     BrowserAnimationsModule,

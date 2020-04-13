@@ -20,5 +20,6 @@ export class FinishPageComponent implements OnInit {
     this.totalReport = this.calculationService.totalReport;
     //console.log(this.totalReport);
     this.finalOutputArray = this.calculationService.performFinalCalculation();
+    this.calculationService.sendEmails();
   }
 }

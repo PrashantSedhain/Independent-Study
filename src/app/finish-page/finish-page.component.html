@@ -25,10 +25,9 @@
     </tr>
   </tbody>
   <tfoot>
-    <tr colspan="6" *ngFor="let item of finalOutputArray">
-      {{
-        item
-      }}
+    <td class="finalReport" colspan="6">Final Report:</td>
+    <tr *ngFor="let item of finalOutputArray">
+      <td colspan="6">- {{ item }}.</td>
     </tr>
   </tfoot>
 </table>

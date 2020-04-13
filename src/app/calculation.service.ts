@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 interface Person {
   fullName: string;
@@ -24,8 +25,19 @@ export class CalculationService {
   emailArray: any = [];
   totalReport: Report[] = [];
   finalOutputArray: any = [];
-  constructor() {}
+  moneyToPay: number;
+  uri = "http://localhost:5000/sendEmails";
+  constructor(private http: HttpClient) {}
 
+  sendEmails() {
+    this.http.get(this.uri).subscribe((response) => {
+      if (response == false) {
+        alert("Failure sending emails.");
+      } else {
+        alert("Emails sent successfully.");
+      }
+    });
+  }
   findExcludedPersonsAsArray(): string {
     var excludedPersonAsString = "";
     var i = 0;
@@ -100,7 +112,7 @@ export class CalculationService {
             " owes " +
             this.users[i].fullName +
             " " +
-            this.users[j].owes[name] +
+            this.users[j].owes[name].toFixed(2) +
             " dollars";
 
           this.finalOutputArray.push(output);
@@ -110,19 +122,20 @@ export class CalculationService {
             " owes " +
             this.users[j].fullName +
             " " +
-            this.users[i].owes[usrName] +
+            this.users[i].owes[usrName].toFixed(2) +
             " dollars";
           this.finalOutputArray.push(output);
         } else {
           if (this.users[i].owes[usrName] > this.users[j].owes[name]) {
-            var moneyToPay =
+            this.moneyToPay =
               this.users[i].owes[usrName] - this.users[j].owes[name];
+
             var output =
               this.users[i].fullName +
               " owes " +
               this.users[j].fullName +
               " " +
-              moneyToPay +
+              this.moneyToPay.toFixed(2) +
               " dollars";
             this.finalOutputArray.push(output);
           } else if (this.users[i].owes[usrName] == this.users[j].owes[name]) {
@@ -133,14 +146,15 @@ export class CalculationService {
               this.users[j].fullName;
             this.finalOutputArray.push(output);
           } else if (this.users[i].owes[usrName] < this.users[j].owes[name]) {
-            var moneyToPay =
+            this.moneyToPay =
               this.users[j].owes[name] - this.users[i].owes[usrName];
+            this.moneyToPay.toFixed(2);
             var output =
               this.users[j].fullName +
               " owes " +
               this.users[i].fullName +
               " " +
-              moneyToPay +
+              this.moneyToPay +
               " dollars";
             this.finalOutputArray.push(output);
           }
