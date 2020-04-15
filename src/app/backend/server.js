@@ -18,11 +18,12 @@ process.on("unhandledRejection", (err, promise) => {
   //Close the server and exit the process
   server.close(() => process.exit(1));
 });
+const api_key = process.env.API_KEY;
+const domain = process.env.DOMAIN;
+console.log(api_key);
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get("/sendEmails", function (req, res) {
-  var api_key = process.env(API_KEY);
-  var domain = process.env(DOMAIN);
   var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
 
   var data = {
