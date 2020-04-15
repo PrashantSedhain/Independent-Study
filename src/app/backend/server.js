@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
 
 const app = express();
 app.use(cors());
-
+dotenv.config({ path: "./config/config.env" });
 const PORT = 5000;
 
 const server = app.listen(PORT, () => {
@@ -20,8 +21,8 @@ process.on("unhandledRejection", (err, promise) => {
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get("/sendEmails", function (req, res) {
-  var api_key = "011ad30e22a2ae8f0e3227286b8b61c7-915161b7-d7aa06c0";
-  var domain = "sandbox39f031d7bf7c4f5cbfd9f08cd6442f11.mailgun.org";
+  var api_key = process.env(API_KEY);
+  var domain = process.env(DOMAIN);
   var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
 
   var data = {
