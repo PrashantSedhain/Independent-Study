@@ -30,13 +30,23 @@ export class CalculationService {
   totalReport: Report[] = [];
   finalOutputArray: any = [];
   bodyToBeSentToServer = {};
+  emailToBeSentToServer = {};
   moneyToPay: number;
   uri = "http://localhost:5000/sendEmails";
+  getEmailsURI = "http://localhost:5000/getEmails";
   constructor(private http: HttpClient) {}
 
   generateKeys() {
     this.keyGenerator = this.keyGenerator + 1;
     return "key" + this.keyGenerator;
+  }
+
+  populateEmails() {
+    var i = 0;
+    this.emailArray.forEach((email) => {
+      this.emailToBeSentToServer[i] = email;
+      i++;
+    });
   }
 
   populateBody() {
@@ -45,10 +55,22 @@ export class CalculationService {
     });
   }
 
+  getEmails() {
+    this.populateEmails();
+    var body = JSON.stringify(this.emailToBeSentToServer);
+    this.http
+      .post(this.getEmailsURI, body, { headers: this.headers })
+      .subscribe((response) => {
+        if (response == false) {
+          alert("An Error was encountered.");
+        }
+      });
+  }
+
   sendEmails() {
+    this.getEmails();
     this.populateBody();
     var body = JSON.stringify(this.bodyToBeSentToServer);
-    console.log("From client" + body);
     this.http
       .post(this.uri, body, { headers: this.headers })
       .subscribe((response) => {

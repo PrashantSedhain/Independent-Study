@@ -106,9 +106,7 @@ export class SplitPageComponent implements OnInit {
       };
       this.users.push(singleUser);
     }
-
-    this.nameArray = [];
-    this.emailArray = [];
+    this.calculationService.emailArray = this.emailArray;
     this.calculationService.users = this.users;
   }
 }

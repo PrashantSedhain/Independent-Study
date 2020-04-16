@@ -22,8 +22,30 @@ process.on("unhandledRejection", (err, promise) => {
 });
 const api_key = process.env.API_KEY;
 const domain = process.env.DOMAIN;
+var emailList = "";
 
-// respond with "hello world" when a GET request is made to the homepage
+app.post("/getEmails", function (req, res) {
+  emailList = "";
+  var emailAddresses = JSON.stringify(req.body);
+  var obj = JSON.parse(emailAddresses);
+  let arrValues = Object.values(obj);
+  var i = 0;
+  arrValues.forEach((item) => {
+    if (i > 0) {
+      emailList += ",";
+    }
+    i = i + 1;
+    emailList += item;
+  });
+
+  if (emailList == null) {
+    res.status(400).json({ success: false });
+  } else {
+    console.log(emailList);
+    res.status(200).json({ success: true });
+  }
+});
+
 app.post("/sendEmails", function (req, res) {
   var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
   var output = JSON.stringify(req.body);
@@ -32,20 +54,17 @@ app.post("/sendEmails", function (req, res) {
   let obj = JSON.parse(output);
   let arrValues = Object.values(obj);
   arrValues.forEach((item) => {
-    stringOutput += i + ". " + item + ".\n";
+    stringOutput += i + ".  " + item + ".\n";
     i = i + 1;
   });
 
-  //console.log("Logging from server " + output);
+  console.log("Logging from server " + emailList);
   var data = {
     from: "Splitwise <peterpixel123@gmail.com>",
-    to: "prashantased@gmail.com",
+    to: `${emailList}`,
     subject: "Your Monthly Expense Report",
-    text: `Hello there, Please find the details of your monthly expense below.\n\n${stringOutput}\nThank you for using splitwise. If you experienced any kind of issue while using this application please be sure to update us at prashantased@gmail.com. Your opinion is important to us.\n\nSincerely,\nPrashant Sedhain\nFounder - Splitwise`,
+    text: `Hello there,\n\nPlease find the details of your monthly expense below.\n\n${stringOutput}\nThank you for using splitwise. If you experienced any kind of issue while using this application please be sure to update us at prashantased@gmail.com. Your opinion is important to us.\n\nSincerely,\nPrashant Sedhain\nSplitwise Inc.`,
   };
-
-  console.log(data);
-
   mailgun.messages().send(data, function (error, body) {
     if (error) {
       res.status(400).json({ success: false });
