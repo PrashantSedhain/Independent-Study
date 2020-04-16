@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 interface Person {
   fullName: string;
@@ -16,6 +16,10 @@ interface Report {
   providedIn: "root",
 })
 export class CalculationService {
+  headers = new HttpHeaders({
+    "Content-Type": "application/json",
+  });
+  keyGenerator: number = 0;
   titleOfExpense: String;
   userWhoPaid: String;
   amountPaid: any;
@@ -25,18 +29,35 @@ export class CalculationService {
   emailArray: any = [];
   totalReport: Report[] = [];
   finalOutputArray: any = [];
+  bodyToBeSentToServer = {};
   moneyToPay: number;
   uri = "http://localhost:5000/sendEmails";
   constructor(private http: HttpClient) {}
 
-  sendEmails() {
-    this.http.get(this.uri).subscribe((response) => {
-      if (response == false) {
-        alert("Failure sending emails.");
-      } else {
-        alert("Emails sent successfully.");
-      }
+  generateKeys() {
+    this.keyGenerator = this.keyGenerator + 1;
+    return "key" + this.keyGenerator;
+  }
+
+  populateBody() {
+    this.finalOutputArray.forEach((output) => {
+      this.bodyToBeSentToServer[this.generateKeys()] = output;
     });
+  }
+
+  sendEmails() {
+    this.populateBody();
+    var body = JSON.stringify(this.bodyToBeSentToServer);
+    console.log("From client" + body);
+    this.http
+      .post(this.uri, body, { headers: this.headers })
+      .subscribe((response) => {
+        if (response == false) {
+          alert("Failure sending emails.");
+        } else {
+          alert("Emails sent successfully.");
+        }
+      });
   }
   findExcludedPersonsAsArray(): string {
     var excludedPersonAsString = "";

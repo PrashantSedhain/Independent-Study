@@ -3,6 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const app = express();
+//Body parser
+app.use(express.json());
 app.use(cors());
 dotenv.config({ path: "./config/config.env" });
 const PORT = 5000;
@@ -20,19 +22,29 @@ process.on("unhandledRejection", (err, promise) => {
 });
 const api_key = process.env.API_KEY;
 const domain = process.env.DOMAIN;
-console.log(api_key);
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get("/sendEmails", function (req, res) {
+app.post("/sendEmails", function (req, res) {
   var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
+  var output = JSON.stringify(req.body);
+  var stringOutput = "";
+  var i = 1;
+  let obj = JSON.parse(output);
+  let arrValues = Object.values(obj);
+  arrValues.forEach((item) => {
+    stringOutput += i + ". " + item + ".\n";
+    i = i + 1;
+  });
 
+  //console.log("Logging from server " + output);
   var data = {
     from: "Splitwise <peterpixel123@gmail.com>",
     to: "prashantased@gmail.com",
     subject: "Your Monthly Expense Report",
-    text:
-      "Hello there, Please find your monthly expense report from the link below.",
+    text: `Hello there, Please find the details of your monthly expense below.\n\n${stringOutput}\nThank you for using splitwise. If you experienced any kind of issue while using this application please be sure to update us at prashantased@gmail.com. Your opinion is important to us.\n\nSincerely,\nPrashant Sedhain\nFounder - Splitwise`,
   };
+
+  console.log(data);
 
   mailgun.messages().send(data, function (error, body) {
     if (error) {
