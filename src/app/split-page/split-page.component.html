@@ -8,10 +8,14 @@
       <mat-option value="4">4</mat-option>
       <mat-option value="5">5</mat-option>
       <mat-option value="6">6</mat-option>
+      <mat-option value="7">7</mat-option>
+      <mat-option value="8">8</mat-option>
+      <mat-option value="9">9</mat-option>
+      <mat-option value="10">10</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <h2 *ngIf="test" class="header">
+  <h2 *ngIf="numberSelected" class="header">
     Please enter their information below:
   </h2>
 
@@ -49,8 +53,7 @@
 
   <button
     (click)="addUser()"
-    routerLink="/inputPage"
-    *ngIf="test"
+    *ngIf="numberSelected"
     type="button"
     class="btn btn-light"
   >
