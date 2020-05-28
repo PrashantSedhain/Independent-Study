@@ -58,7 +58,6 @@ app.post("/sendEmails", function (req, res) {
     i = i + 1;
   });
 
-  console.log("Logging from server " + emailList);
   var data = {
     from: "Splitwise <peterpixel123@gmail.com>",
     to: `${emailList}`,
