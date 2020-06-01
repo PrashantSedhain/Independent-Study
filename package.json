@@ -28,6 +28,7 @@
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.15",
     "mailgun-js": "^0.22.0",
+    "mongoose": "^5.9.16",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
