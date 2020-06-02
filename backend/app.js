@@ -1,9 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const app = express();
+const user = require("./models/user");
 
-mongoose.connect();
+const app = express();
+mongoose.set("useCreateIndex", true);
+mongoose.set("useFindAndModify", false);
+
+mongoose
+  .connect(
+    "mongodb+srv://prashant:prashant123@cluster0-zwt9f.mongodb.net/Splitapp",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => {
+    console.log("Connected to database successfully.");
+  })
+  .catch(() => {
+    console.log("Connection failed");
+  });
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
