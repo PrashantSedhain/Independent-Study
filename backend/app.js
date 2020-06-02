@@ -1,11 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const bodyParser = require("body-parser");
 const user = require("./models/user");
 
+const userRouts = require("./routes/user");
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose
   .connect(
@@ -33,12 +36,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/posts", (req, res, next) => {
-  const dummy = {
-    name: "Prashant",
-    class: "Test",
-  };
-  res.json(dummy);
-});
+app.use("/api/user", userRouts);
 
 module.exports = app;
