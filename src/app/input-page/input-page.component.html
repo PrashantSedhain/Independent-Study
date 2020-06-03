@@ -1,5 +1,65 @@
 <div class="container">
-    <h2 class="header">Enter the amount paid below:</h2>
-    <input class="form-control" type="number" value="42" id="example-number-input">
-    <h2 class="header">Paid by:</h2>
+  <h2 class="header">Enter the title:</h2>
+  <input
+    class="form-control"
+    placeholder="Ex: HEB Shopping"
+    type="text"
+    id="example-number-input"
+    name="titleOfExpense"
+    [(ngModel)]="titleOfExpense"
+  />
+
+  <h2 class="header">Enter the amount paid below:</h2>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">$</span>
+    </div>
+    <input
+      name="amountPaid"
+      [(ngModel)]="amountPaid"
+      id="example-number-input"
+      placeholder="Enter the amount"
+      type="number"
+      class="form-control"
+      aria-label="Amount (to the nearest dollar)"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text">.00</span>
+    </div>
+  </div>
+  <!-- <input
+    class="form-control"
+    type="number"
+    name="amountPaid"
+    [(ngModel)]="amountPaid"
+    id="example-number-input"
+  /> -->
+  <h2 class="header">Paid by:</h2>
+  <mat-form-field>
+    <mat-label>Please Select</mat-label>
+    <mat-select [(ngModel)]="userWhoPaid" name="userWhoPaid">
+      <mat-option *ngFor="let user of users" value="{{ user.fullName }}"
+        >{{ user.fullName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <h2 class="exclude">Exclude:</h2>
+  <section class="example-section">
+    <mat-checkbox
+      class="example-margin"
+      *ngFor="let user of users; let i = index"
+      value="{{ user.fullName }}"
+      [(ngModel)]="user.checked"
+      >{{ user.fullName }}</mat-checkbox
+    >
+  </section>
+  <br />
+  <br />
+  <button (click)="onAddExpense()" type="button" class="btn btn-light">
+    Add Expense
+  </button>
+  <button routerLink="/finishPage" type="button" class="btn btn-light">
+    Finish
+  </button>
 </div>

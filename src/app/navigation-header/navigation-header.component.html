@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
 <link
   rel="stylesheet"
@@ -6,9 +6,6 @@
 />
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="../../assets/home.jpg" width="30" height="30" alt="" />
-  </a>
   <a class="navbar-brand" href="#">Splitwise</a>
 
   <button
@@ -33,26 +30,37 @@
       <li class="nav-item">
         <a class="nav-link" href="#">About Us</a>
       </li>
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Signup</a>
       </li>
     </ul>
   </div>
-</nav>
+</nav> -->
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a href="#" class="navbar-brand">Split-App</a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div
+    class="collapse navbar-collapse justify-content-between"
+    id="navbarCollapse"
+  >
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active">Home</a>
+      <a class="nav-item nav-link">Profile</a>
+    </div>
+    <div class="navbar-nav">
+      <a routerLink="/login" class="nav-item nav-link">Login</a>
+      <a routerLink="/signup" class="nav-item nav-link">Signup</a>
+    </div>
+  </div>
+</nav>

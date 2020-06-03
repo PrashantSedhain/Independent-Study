@@ -1,0 +1,38 @@
+<table
+  id="example"
+  class="table table-striped table-bordered"
+  style="width: 100%;"
+>
+  <thead>
+    <tr>
+      <th>S/N</th>
+      <th>Title of Expense</th>
+      <th>Amount Paid</th>
+      <th>Paid By</th>
+      <th>Excluded Persons</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of totalReport; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.title }}</td>
+      <td>${{ item.amountPaid }}</td>
+      <td>{{ item.paidBy }}</td>
+      <td>{{ item.excludedPerson }}</td>
+      <button type="button" class="btn btn-link">Edit</button>
+      <button type="button" class="btn btn-link">Delete</button>
+    </tr>
+  </tbody>
+  <tfoot>
+    <td class="finalReport" colspan="6">Final Report:</td>
+    <tr *ngFor="let item of finalOutputArray">
+      <td colspan="6">- {{ item }}.</td>
+    </tr>
+  </tfoot>
+</table>
+<div class="row justify-content-center">
+  <button (click)="sendEmails()" type="submit" class="btn btn-info">
+    Notify Everyone With Email
+  </button>
+</div>

@@ -5,28 +5,41 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavigationHeaderComponent } from "./navigation-header/navigation-header.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatFormFieldModule } from "@angular/material";
+import { HttpClientModule } from "@angular/common/http";
+
+import {
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatSnackBarModule,
+} from "@angular/material";
 import { MatInputModule } from "@angular/material";
 import { MatRippleModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material";
 import { MatOptionModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { SplitPageComponent } from "./split-page/split-page.component";
-import { FirstPageComponent } from "./first-page/first-page.component";
-import { UserInfoComponent } from "./user-info/user-info.component";
-import { InputPageComponent } from './input-page/input-page.component';
+import { InputPageComponent } from "./input-page/input-page.component";
+import { FinishPageComponent } from "./finish-page/finish-page.component";
+import { LandingPageComponent } from "./landing-page/landing-page.component";
+import { TestComponent } from './test/test.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationHeaderComponent,
     SplitPageComponent,
-    FirstPageComponent,
-    UserInfoComponent,
-    InputPageComponent
+    InputPageComponent,
+    FinishPageComponent,
+    LandingPageComponent,
+    TestComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
@@ -36,17 +49,19 @@ import { InputPageComponent } from './input-page/input-page.component';
     MatInputModule,
     MatRippleModule,
     MatOptionModule,
+    HttpClientModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    MatSnackBarModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
