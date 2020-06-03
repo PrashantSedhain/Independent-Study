@@ -22,6 +22,8 @@ import { InputPageComponent } from "./input-page/input-page.component";
 import { FinishPageComponent } from "./finish-page/finish-page.component";
 import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { TestComponent } from './test/test.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { TestComponent } from './test/test.component';
     FinishPageComponent,
     LandingPageComponent,
     TestComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
