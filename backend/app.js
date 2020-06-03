@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const user = require("./models/user");
 
-const userRouts = require("./routes/user");
+const userRoutes = require("./routes/user");
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
@@ -35,7 +35,10 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.get("/", function (req, res) {
+  res.render("index");
+});
 
-app.use("/api/user", userRouts);
+app.use("/api/user", userRoutes);
 
 module.exports = app;

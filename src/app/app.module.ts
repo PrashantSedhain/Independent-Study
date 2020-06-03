@@ -5,7 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavigationHeaderComponent } from "./navigation-header/navigation-header.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import {
   MatFormFieldModule,
@@ -21,9 +21,9 @@ import { SplitPageComponent } from "./split-page/split-page.component";
 import { InputPageComponent } from "./input-page/input-page.component";
 import { FinishPageComponent } from "./finish-page/finish-page.component";
 import { LandingPageComponent } from "./landing-page/landing-page.component";
-import { TestComponent } from './test/test.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from "./signup/signup.component";
+import { AuthInterceptor } from "./Auth/auth-interceptor";
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
   declarations: [
@@ -33,13 +33,13 @@ import { SignupComponent } from './signup/signup.component';
     InputPageComponent,
     FinishPageComponent,
     LandingPageComponent,
-    TestComponent,
     LoginComponent,
     SignupComponent,
   ],
   imports: [
     BrowserModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
@@ -61,7 +61,9 @@ import { SignupComponent } from './signup/signup.component';
     MatRippleModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
