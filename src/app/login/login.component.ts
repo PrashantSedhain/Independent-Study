@@ -59,22 +59,23 @@ export class LoginComponent implements OnInit {
     return this.signinForm.controls;
   }
   ngOnInit() {
-    // this.authStatusSub = this.authService
-    //   .getAuthStatusListner()
-    //   .subscribe((authStatus) => {
-    //     this.openSnackBar();
-    //   });
+    this.authStatusSub = this.authService
+      .getAuthStatusListner()
+      .subscribe((authStatus) => {
+        this.openSnackBar();
+      });
   }
   openSnackBar() {
     let currentUser;
     this.authService.getcurrentUserDetails().subscribe((data) => {
       currentUser = data;
       this._snackBar.open(
-        "Welcome back " +
-          currentUser.firstName +
-          " " +
-          currentUser.lastName +
-          "!",
+        "Welcome back ",
+
+        // + currentUser.firstName +
+        // " " +
+        // currentUser.lastName +
+        // "!"
         "Okay",
         {
           duration: 2000,

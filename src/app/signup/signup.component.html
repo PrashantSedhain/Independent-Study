@@ -22,6 +22,17 @@
               placeholder=""
             />
           </div>
+          <div *ngFor="let error of error_messages.email">
+            <mat-error
+              *ngIf="
+                signupForm.get('email').hasError(error.type) &&
+                (signupForm.get('email').dirty ||
+                  signupForm.get('email').touched)
+              "
+            >
+              {{ error.message }}
+            </mat-error>
+          </div>
           <div class="form-group">
             <label for="exampleInputPassword1" class="text-uppercase"
               >Password</label
@@ -33,6 +44,17 @@
               placeholder=""
             />
           </div>
+          <div *ngFor="let error of error_messages.password">
+            <mat-error
+              *ngIf="
+                signupForm.get('password').hasError(error.type) &&
+                (signupForm.get('password').dirty ||
+                  signupForm.get('password').touched)
+              "
+            >
+              {{ error.message }}
+            </mat-error>
+          </div>
           <div class="form-group">
             <label for="exampleInputPassword1" class="text-uppercase"
               >Confirm Password</label
@@ -43,6 +65,17 @@
               formControlName="confirmpassword"
               placeholder=""
             />
+          </div>
+          <div *ngFor="let error of error_messages.confirmpassword">
+            <mat-error
+              *ngIf="
+                signupForm.get('confirmpassword').hasError(error.type) &&
+                (signupForm.get('confirmpassword').dirty ||
+                  signupForm.get('confirmpassword').touched)
+              "
+            >
+              {{ error.message }}
+            </mat-error>
           </div>
 
           <div class="form-check">
@@ -57,6 +90,19 @@
                 conditions.</small
               >
             </label>
+            <div *ngFor="let error of error_messages.acceptTerms">
+              <mat-error
+                *ngIf="
+                  signupForm.get('acceptTerms').hasError(error.type) &&
+                  (signupForm.get('acceptTerms').dirty ||
+                    signupForm.get('acceptTerms').touched)
+                "
+              >
+                <br />
+                <br />
+                {{ error.message }}
+              </mat-error>
+            </div>
             <button
               type="submit"
               value="Sign Up"
