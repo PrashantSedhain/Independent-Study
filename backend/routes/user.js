@@ -26,6 +26,10 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get("/getCurrentUserDetails", (req, res, next) => {
+  res.json({ message: "I am at getCurrentUserDetails" });
+});
+
 router.post("/login", loginCaseChange, (req, res, next) => {
   let getUser;
   User.findOne({ email: req.body.email })

@@ -59,11 +59,11 @@ export class LoginComponent implements OnInit {
     return this.signinForm.controls;
   }
   ngOnInit() {
-    this.authStatusSub = this.authService
-      .getAuthStatusListner()
-      .subscribe((authStatus) => {
-        this.openSnackBar();
-      });
+    // this.authStatusSub = this.authService
+    //   .getAuthStatusListner()
+    //   .subscribe((authStatus) => {
+    //     this.openSnackBar();
+    //   });
   }
   openSnackBar() {
     let currentUser;
@@ -83,6 +83,6 @@ export class LoginComponent implements OnInit {
     });
   }
   ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
+    // this.authStatusSub.unsubscribe();
   }
 }

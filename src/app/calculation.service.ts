@@ -32,8 +32,8 @@ export class CalculationService {
   bodyToBeSentToServer = {};
   emailToBeSentToServer = {};
   moneyToPay: number;
-  uri = "http://localhost:5000/sendEmails";
-  getEmailsURI = "http://localhost:5000/getEmails";
+  uri = "http://localhost:3000/email/sendEmails";
+  getEmailsURI = "http://localhost:3000/email/getEmails";
   constructor(private http: HttpClient) {}
 
   generateKeys() {

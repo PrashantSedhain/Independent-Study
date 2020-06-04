@@ -4,7 +4,6 @@ import { AuthData } from "./signupAuth-data.model";
 import {
   loginAuthData,
   UserDetails,
-  UserImg,
   currentUserID,
   CurrentUserDetails,
 } from "./loginAuth-data";
@@ -85,6 +84,7 @@ export class AuthService {
           const token = res.token;
           this.token = token;
           if (token) {
+            console.log(token);
             const expiresInDuration = res.expiresIn;
             this.setAuthTimer(expiresInDuration);
             this.isAuthenticated = true;

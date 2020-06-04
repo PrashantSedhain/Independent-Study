@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const user = require("./models/user");
 
 const userRoutes = require("./routes/user");
+const emailRoutes = require("./routes/email");
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
@@ -26,7 +27,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
 
   res.setHeader(
@@ -40,5 +41,5 @@ app.get("/", function (req, res) {
 });
 
 app.use("/api/user", userRoutes);
-
+app.use("/email", emailRoutes);
 module.exports = app;
