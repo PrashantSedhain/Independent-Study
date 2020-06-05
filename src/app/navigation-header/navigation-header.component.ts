@@ -16,6 +16,10 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy {
     throw new Error("Method not implemented.");
   }
 
+  onLogout() {
+    this.authService.logout();
+  }
+
   ngOnInit() {
     this.authListenerSub = this.authService
       .getAuthStatusListner()

@@ -55,7 +55,6 @@
     id="navbarCollapse"
   >
     <div class="navbar-nav">
-      <a class="nav-item nav-link active">Home</a>
       <a *ngIf="userIsAuthenticated" class="nav-item nav-link">Profile</a>
     </div>
     <div class="navbar-nav">
@@ -71,7 +70,13 @@
         class="nav-item nav-link"
         >Signup</a
       >
-      <a *ngIf="userIsAuthenticated" class="nav-item nav-link">Logout</a>
+      <a
+        *ngIf="userIsAuthenticated"
+        (click)="onLogout()"
+        class="nav-item nav-link"
+        style="cursor: pointer;"
+        >Logout</a
+      >
     </div>
   </div>
 </nav>
