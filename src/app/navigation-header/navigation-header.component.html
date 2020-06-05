@@ -56,11 +56,22 @@
   >
     <div class="navbar-nav">
       <a class="nav-item nav-link active">Home</a>
-      <a class="nav-item nav-link">Profile</a>
+      <a *ngIf="userIsAuthenticated" class="nav-item nav-link">Profile</a>
     </div>
     <div class="navbar-nav">
-      <a routerLink="/login" class="nav-item nav-link">Login</a>
-      <a routerLink="/signup" class="nav-item nav-link">Signup</a>
+      <a
+        *ngIf="!userIsAuthenticated"
+        routerLink="/login"
+        class="nav-item nav-link"
+        >Login</a
+      >
+      <a
+        *ngIf="!userIsAuthenticated"
+        routerLink="/signup"
+        class="nav-item nav-link"
+        >Signup</a
+      >
+      <a *ngIf="userIsAuthenticated" class="nav-item nav-link">Logout</a>
     </div>
   </div>
 </nav>

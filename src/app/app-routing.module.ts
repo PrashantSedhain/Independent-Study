@@ -6,12 +6,25 @@ import { FinishPageComponent } from "./finish-page/finish-page.component";
 import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
+import { AuthGuard } from "./Auth/auth.guard";
 
 const routes: Routes = [
-  { path: "splitPage", component: SplitPageComponent },
+  {
+    path: "splitPage",
+    component: SplitPageComponent,
+    canActivate: [AuthGuard],
+  },
   { path: "", component: LandingPageComponent },
-  { path: "inputPage", component: InputPageComponent },
-  { path: "finishPage", component: FinishPageComponent },
+  {
+    path: "inputPage",
+    component: InputPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "finishPage",
+    component: FinishPageComponent,
+    canActivate: [AuthGuard],
+  },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
 ];
@@ -19,5 +32,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}
