@@ -11,6 +11,8 @@ import {
   MatFormFieldModule,
   MatCheckboxModule,
   MatSnackBarModule,
+  MatSelectionList,
+  MatListModule,
 } from "@angular/material";
 import { MatInputModule } from "@angular/material";
 import { MatRippleModule } from "@angular/material";
@@ -24,6 +26,7 @@ import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { SignupComponent } from "./signup/signup.component";
 import { AuthInterceptor } from "./Auth/auth-interceptor";
 import { LoginComponent } from "./login/login.component";
+import { ProfilePageComponent } from "./profile-page/profile-page.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { LoginComponent } from "./login/login.component";
     LandingPageComponent,
     LoginComponent,
     SignupComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,7 @@ import { LoginComponent } from "./login/login.component";
     MatSelectModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
+    MatListModule,
   ],
   exports: [
     MatButtonModule,
@@ -60,6 +65,7 @@ import { LoginComponent } from "./login/login.component";
     MatInputModule,
     MatRippleModule,
     MatSelectModule,
+    MatListModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

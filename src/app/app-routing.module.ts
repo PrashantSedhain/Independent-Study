@@ -7,6 +7,7 @@ import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { AuthGuard } from "./Auth/auth.guard";
+import { ProfilePageComponent } from "./profile-page/profile-page.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: "inputPage",
     component: InputPageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "profilePage",
+    component: ProfilePageComponent,
+    // canActivate: [AuthGuard],
   },
   {
     path: "finishPage",
