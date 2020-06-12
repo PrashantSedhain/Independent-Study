@@ -5,8 +5,7 @@ const Group = require("../models/group");
 const checkAuth = require("../middleware/check-auth");
 const { route } = require("./user");
 
-
-router.post('/create', (req, res, next) => {
-    
-
-})
+router.get("/create", (req, res, next) => {
+  res.status(200).json({ message: "I am working..." });
+});
+module.exports = router;

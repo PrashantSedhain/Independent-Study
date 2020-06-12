@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const user = require("./models/user");
 
+const groupRoutes = require("./routes/group");
 const userRoutes = require("./routes/user");
 const emailRoutes = require("./routes/email");
-const groupRoutes = require("./models/group");
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
