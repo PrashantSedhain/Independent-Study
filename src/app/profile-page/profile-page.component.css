@@ -1,8 +1,14 @@
 .list-group {
   padding-top: 10px;
-  padding-left: 40px;
-  width: 90%;
+  width: 70%;
+  /* padding-left: 40px; */
 }
 .heading {
-  background-color: rgb(245, 160, 128);
+  background-color: gray;
+}
+.welcome {
+  align-content: center;
+}
+.textClass {
+  font-weight: lighter;
 }

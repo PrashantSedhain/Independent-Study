@@ -5,6 +5,7 @@ const router = express.Router();
 const api_key = process.env.API_KEY;
 const domain = process.env.DOMAIN;
 var emailList = "";
+
 router.post("/getEmails", function (req, res) {
   emailList = "";
   var emailAddresses = JSON.stringify(req.body);

@@ -5,6 +5,7 @@ const user = require("./models/user");
 
 const userRoutes = require("./routes/user");
 const emailRoutes = require("./routes/email");
+const groupRoutes = require("./models/group");
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
@@ -42,4 +43,5 @@ app.get("/", function (req, res) {
 
 app.use("/api/user", userRoutes);
 app.use("/email", emailRoutes);
+app.use("/api/group", groupRoutes);
 module.exports = app;
