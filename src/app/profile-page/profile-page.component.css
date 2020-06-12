@@ -12,3 +12,6 @@
 .textClass {
   font-weight: lighter;
 }
+.col-sm-4 {
+  padding-top: 30px;
+}
