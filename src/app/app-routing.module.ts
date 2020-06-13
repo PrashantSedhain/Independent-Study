@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: "splitPage",
     component: SplitPageComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   { path: "", component: LandingPageComponent },
   {

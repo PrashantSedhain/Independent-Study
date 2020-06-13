@@ -15,6 +15,8 @@ export class ProfilePageComponent implements OnInit {
   ];
 
   constructor() {}
-
+  testing() {
+    console.log("I was clicked");
+  }
   ngOnInit() {}
 }
