@@ -12,14 +12,8 @@ router.post("/create", (req, res, next) => {
     token[1],
     "secret_password_here_this_is_Temporary"
   );
-  id = "";
-  for (x in decoded) {
-    if (x == "id") {
-      this.id = decoded[x];
-      break;
-    }
-  }
-  console.log(this.id);
+  id = decoded["id"];
+
   const group = new Group({
     // author: {
     //   id: {
