@@ -13,8 +13,6 @@ interface Report {
   paidBy: String;
 }
 
-
-
 @Injectable({
   providedIn: "root",
 })

@@ -172,6 +172,7 @@ export class AuthService {
     if (token) {
       payload = token.split(".")[1];
       payload = window.atob(payload);
+
       return JSON.parse(payload);
     } else {
       return null;

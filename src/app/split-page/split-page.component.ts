@@ -9,9 +9,16 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { CalculationService } from "../calculation.service";
 import { SnackbarService } from "../snackbar.service";
 import { Router } from "@angular/router";
+import { GroupService } from "../group.service";
+import { AuthService } from "../Auth/auth.service";
+
+interface Test {
+  userID: string;
+}
 
 interface Group {
-  name: String;
+  _id: Number;
+  groupName: String;
   count: Number;
   names: Array<String>;
   emails: Array<String>;
@@ -46,16 +53,11 @@ export class SplitPageComponent implements OnInit {
   constructor(
     private calculationService: CalculationService,
     private snackBarService: SnackbarService,
-    private router: Router
-  ) {
-    const group: Group = {
-      name: "Apt 101",
-      count: 5,
-      emails: ["prashantased@gmail.com"],
-      names: ["Prashant Sedhain"],
-    };
-    console.log(group);
-  }
+    private router: Router,
+    private groupService: GroupService,
+    private authService: AuthService
+  ) {}
+  userId: Test;
   enableButton: boolean = false;
   selected: Number;
   list: number[] = [];
@@ -85,7 +87,6 @@ export class SplitPageComponent implements OnInit {
   isValid() {
     for (let i = 0; i < this.selected; i++) {
       if (this.emailArray[i] == null || this.emailArray[i] == "") {
-        console.log("Email is " + this.emailArray[i]);
         return false;
       }
       if (this.nameArray[i] == null || this.nameArray[i] == "") {
@@ -113,6 +114,17 @@ export class SplitPageComponent implements OnInit {
       }
       this.calculationService.emailArray = this.emailArray;
       this.calculationService.users = this.users;
+      const group: Group = {
+        _id: 12345678,
+        groupName: "Apt 101",
+        count: 5,
+        emails: ["peterpixel123@gmail.com"],
+        names: ["Prashant Sedhain"],
+      };
+      var jsonBody = JSON.stringify(group);
+      this.groupService.createGroup(jsonBody);
+      this.userId = this.authService.getCurrentUserID();
+      console.log(this.userId.userID);
       this.router.navigate(["/inputPage"]);
     }
   }
