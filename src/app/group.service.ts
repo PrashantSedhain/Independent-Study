@@ -12,6 +12,7 @@ interface Group {
   providedIn: "root",
 })
 export class GroupService {
+  ListOfGroups: Array<Group>;
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
@@ -26,6 +27,20 @@ export class GroupService {
           console.log("New Group Created Successfully");
         } else {
           alert("Failed to create new Group");
+        }
+      });
+  }
+
+  findGroups() {
+    this.http
+      .get<{ message: boolean; data: Array<Group> }>(
+        "http://localhost:3000/api/group/findGroups"
+      )
+      .subscribe((res) => {
+        if (res.message) {
+          this.ListOfGroups = res.data;
+        } else {
+          alert("Some error encountered while loading groups.");
         }
       });
   }

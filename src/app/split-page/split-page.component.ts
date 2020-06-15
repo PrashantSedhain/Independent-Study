@@ -57,6 +57,7 @@ export class SplitPageComponent implements OnInit {
     private groupService: GroupService,
     private authService: AuthService
   ) {}
+  ListOfGroups: Array<Group>;
   userId: Test;
   enableButton: boolean = false;
   selected: Number;
@@ -73,7 +74,9 @@ export class SplitPageComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
-  ngOnInit() {}
+  ngOnInit() {
+    this.groupService.findGroups();
+  }
 
   public createArray() {
     this.numberSelected = true;
@@ -114,17 +117,17 @@ export class SplitPageComponent implements OnInit {
       }
       this.calculationService.emailArray = this.emailArray;
       this.calculationService.users = this.users;
-      const group: Group = {
-        _id: 12345678,
-        groupName: "Apt 101",
-        count: 5,
-        emails: ["peterpixel123@gmail.com"],
-        names: ["Prashant Sedhain"],
-      };
-      var jsonBody = JSON.stringify(group);
-      this.groupService.createGroup(jsonBody);
+      console.log(this.groupService.ListOfGroups);
+      // const group: Group = {
+      //   _id: 12345678,
+      //   groupName: "Apt 101",
+      //   count: 5,
+      //   emails: ["peterpixel123@gmail.com"],
+      //   names: ["Prashant Sedhain"],
+      // };
+      // var jsonBody = JSON.stringify(group);
+      //this.groupService.createGroup(jsonBody);
       this.userId = this.authService.getCurrentUserID();
-      console.log(this.userId.userID);
       this.router.navigate(["/inputPage"]);
     }
   }
