@@ -7,27 +7,16 @@ const { route } = require("./user");
 const { findById } = require("../models/group");
 const { find } = require("lodash");
 
-function getUserID() {
-  return id;
-}
-
 router.post("/create", (req, res, next) => {
-  const usertoken = req.headers.authorization;
-  const token = usertoken.split(" ");
-  const decoded = jwt.verify(
-    token[1],
-    "secret_password_here_this_is_Temporary"
-  );
-  id = decoded["id"];
   const group = new Group({
-    userId: this.id,
+    userId: req.body.userId,
     count: req.body.count,
     names: req.body.names,
+    groupName: req.body.groupName,
     emails: req.body.emails,
   });
-
   group.save().then((result) => {
-    res.status(201).json({ message: "Saved Group", body: group });
+    res.status(201).json({ message: "Group Saved ", body: group });
   });
 });
 
@@ -41,6 +30,7 @@ router.get("/findGroups", (req, res, next) => {
   id = decoded["id"];
   Group.find({ userId: id }).then((groups) => {
     if (groups) {
+      console.log(groups);
       res.status(200).json({ message: true, data: groups });
     } else {
       res.status(400).json({ message: false, data: null });

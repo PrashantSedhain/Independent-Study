@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { SnackbarService } from "./snackbar.service";
 
 interface Group {
   groupName: String;
@@ -17,16 +18,19 @@ export class GroupService {
     "Content-Type": "application/json",
   });
   uri = "http://localhost:3000/api/group/";
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private snackBarService: SnackbarService
+  ) {}
 
   createGroup(body) {
     this.http
       .post(`${this.uri}/create`, body, { headers: this.headers })
       .subscribe((response) => {
         if (response) {
-          console.log("New Group Created Successfully");
+          this.snackBarService.openSnackBar("Group added!", "Success");
         } else {
-          alert("Failed to create new Group");
+          this.snackBarService.openSnackBar("Failure", "Error");
         }
       });
   }
@@ -39,8 +43,6 @@ export class GroupService {
       .subscribe((res) => {
         if (res.message) {
           this.ListOfGroups = res.data;
-        } else {
-          alert("Some error encountered while loading groups.");
         }
       });
   }

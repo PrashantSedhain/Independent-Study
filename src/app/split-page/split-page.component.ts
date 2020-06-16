@@ -17,7 +17,7 @@ interface Test {
 }
 
 interface Group {
-  _id: Number;
+  userId: String;
   groupName: String;
   count: Number;
   names: Array<String>;
@@ -98,6 +98,23 @@ export class SplitPageComponent implements OnInit {
     }
 
     return true;
+  }
+
+  createGroup() {
+    var data = this.authService.getCurrentUserID();
+    const id = data["id"];
+    console.log(id);
+
+    const group: Group = {
+      userId: id,
+      groupName: "Apt 101",
+      count: this.emailArray.length,
+      emails: this.emailArray,
+      names: this.nameArray,
+    };
+    var jsonBody = JSON.stringify(group);
+    console.log(jsonBody);
+    this.groupService.createGroup(jsonBody);
   }
 
   addUser() {

@@ -61,6 +61,14 @@
   >
     Continue
   </button>
+  <button
+    (click)="createGroup()"
+    *ngIf="numberSelected"
+    type="button"
+    class="btn btn-light"
+  >
+    Create Group
+  </button>
   <br />
   <br />
 </div>
