@@ -74,13 +74,11 @@ export class SplitPageComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
-  ngOnInit() {
-    this.groupService.findGroups();
-  }
+  ngOnInit() {}
 
   public createArray() {
     this.numberSelected = true;
-    this.list = [];
+    this.list = [];                                                                                                                                                                                               
     for (let i = 0; i < this.selected; i++) {
       this.list.push(1);
     }
