@@ -30,8 +30,17 @@ router.get("/findGroups", (req, res, next) => {
   id = decoded["id"];
   Group.find({ userId: id }).then((groups) => {
     if (groups) {
-      console.log(groups);
       res.status(200).json({ message: true, data: groups });
+    } else {
+      res.status(400).json({ message: false, data: null });
+    }
+  });
+});
+
+router.get("/findGroupByID/:id", async (req, res, next) => {
+  const group = Group.findById(req.params.id).then((response) => {
+    if (response) {
+      res.status(200).json({ message: true, data: response });
     } else {
       res.status(400).json({ message: false, data: null });
     }

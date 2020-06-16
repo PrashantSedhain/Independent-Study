@@ -11,6 +11,7 @@ import { SnackbarService } from "../snackbar.service";
 import { Router } from "@angular/router";
 import { GroupService } from "../group.service";
 import { AuthService } from "../Auth/auth.service";
+import { groupBy } from "lodash";
 
 interface Test {
   userID: string;
@@ -57,6 +58,7 @@ export class SplitPageComponent implements OnInit {
     private groupService: GroupService,
     private authService: AuthService
   ) {}
+  groupByID: Group;
   ListOfGroups: Array<Group>;
   userId: Test;
   enableButton: boolean = false;
@@ -108,8 +110,6 @@ export class SplitPageComponent implements OnInit {
   createGroup() {
     var data = this.authService.getCurrentUserID();
     const id = data["id"];
-    console.log(id);
-
     const group: Group = {
       userId: id,
       groupName: "Apt 101",
@@ -118,8 +118,17 @@ export class SplitPageComponent implements OnInit {
       names: this.nameArray,
     };
     var jsonBody = JSON.stringify(group);
-    console.log(jsonBody);
     this.groupService.createGroup(jsonBody);
+  }
+
+  findGroupByID(groupID) {
+    var groupData = this.groupService.findGroupByID(groupID);
+    this.loading = true;
+    groupData.subscribe((data) => {
+      this.groupByID = data.data;
+      this.loading = false;
+      console.log("Group By ID: ", this.groupByID.userId);
+    });
   }
 
   addUser() {
@@ -139,16 +148,6 @@ export class SplitPageComponent implements OnInit {
       }
       this.calculationService.emailArray = this.emailArray;
       this.calculationService.users = this.users;
-      console.log(this.groupService.ListOfGroups);
-      // const group: Group = {
-      //   _id: 12345678,
-      //   groupName: "Apt 101",
-      //   count: 5,
-      //   emails: ["peterpixel123@gmail.com"],
-      //   names: ["Prashant Sedhain"],
-      // };
-      // var jsonBody = JSON.stringify(group);
-      //this.groupService.createGroup(jsonBody);
       this.userId = this.authService.getCurrentUserID();
       this.router.navigate(["/inputPage"]);
     }

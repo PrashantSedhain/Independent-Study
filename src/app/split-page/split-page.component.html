@@ -92,6 +92,7 @@
         class="list-group-item list-group-item-action"
         *ngFor="let group of ListOfGroups"
         id="{{ group._id }}"
+        (click)="findGroupByID(group._id)"
         >{{ group.groupName }}</a
       >
 
