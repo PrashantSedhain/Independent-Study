@@ -13,6 +13,7 @@ import {
   MatSnackBarModule,
   MatSelectionList,
   MatListModule,
+  MatProgressBarModule,
 } from "@angular/material";
 import { MatInputModule } from "@angular/material";
 import { MatRippleModule } from "@angular/material";
@@ -58,6 +59,7 @@ import { ProfilePageComponent } from "./profile-page/profile-page.component";
     MatSnackBarModule,
     BrowserAnimationsModule,
     MatListModule,
+    MatProgressBarModule,
   ],
   exports: [
     MatButtonModule,

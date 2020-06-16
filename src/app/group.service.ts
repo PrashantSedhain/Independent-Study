@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SnackbarService } from "./snackbar.service";
+import { Observable } from "rxjs";
 
 interface Group {
   groupName: String;
@@ -35,15 +36,9 @@ export class GroupService {
       });
   }
 
-  findGroups() {
-    this.http
-      .get<{ message: boolean; data: Array<Group> }>(
-        "http://localhost:3000/api/group/findGroups"
-      )
-      .subscribe((res) => {
-        if (res.message) {
-          this.ListOfGroups = res.data;
-        }
-      });
+  findGroups(): Observable<{ data: any }> {
+    return this.http.get<{ data: any }>(
+      "http://localhost:3000/api/group/findGroups"
+    );
   }
 }

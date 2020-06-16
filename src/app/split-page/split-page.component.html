@@ -1,3 +1,5 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
 <div class="row">
   <div class="col-sm-8">
     <div class="container">
@@ -86,16 +88,13 @@
         Select your group or create new
         <span class="badge badge-light">5</span>
       </a>
-      <a href="#" class="list-group-item list-group-item-action"
-        >Apartment 101</a
+      <a
+        class="list-group-item list-group-item-action"
+        *ngFor="let group of ListOfGroups"
+        id="{{ group._id }}"
+        >{{ group.groupName }}</a
       >
-      <a href="#" class="list-group-item list-group-item-action">Khatey Gang</a>
-      <a href="#" class="list-group-item list-group-item-action"
-        >Office Lunch Team</a
-      >
-      <a href="#" class="list-group-item list-group-item-action"
-        >Movie Breakers</a
-      >
+
       <br />
       <p class="textClass">
         Note: Selecting one of the groups above automatically takes you to the

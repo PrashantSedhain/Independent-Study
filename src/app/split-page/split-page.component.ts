@@ -67,18 +67,25 @@ export class SplitPageComponent implements OnInit {
   singleUser: Person;
   nameArray: any = [];
   emailArray: any = [];
-
+  loading: boolean;
   emailFormControl = new FormControl("", [
     Validators.required,
     Validators.email,
   ]);
 
   matcher = new MyErrorStateMatcher();
-  ngOnInit() {}
+  ngOnInit() {
+    this.loading = true;
+    var groupData = this.groupService.findGroups();
+    groupData.subscribe((data) => {
+      this.ListOfGroups = data.data;
+      this.loading = false;
+    });
+  }
 
   public createArray() {
     this.numberSelected = true;
-    this.list = [];                                                                                                                                                                                               
+    this.list = [];
     for (let i = 0; i < this.selected; i++) {
       this.list.push(1);
     }
