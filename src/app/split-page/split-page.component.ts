@@ -81,6 +81,7 @@ export class SplitPageComponent implements OnInit {
     var groupData = this.groupService.findGroups();
     groupData.subscribe((data) => {
       this.ListOfGroups = data.data;
+      this.selected = 3;
       this.loading = false;
     });
   }
@@ -126,8 +127,9 @@ export class SplitPageComponent implements OnInit {
     this.loading = true;
     groupData.subscribe((data) => {
       this.groupByID = data.data;
+      console.log(this.groupByID.count);
+      this.selected = this.groupByID.count;
       this.loading = false;
-      console.log("Group By ID: ", this.groupByID.userId);
     });
   }
 
