@@ -81,7 +81,6 @@ export class SplitPageComponent implements OnInit {
     var groupData = this.groupService.findGroups();
     groupData.subscribe((data) => {
       this.ListOfGroups = data.data;
-      this.selected = 3;
       this.loading = false;
     });
   }
