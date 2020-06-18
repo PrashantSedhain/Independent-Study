@@ -128,14 +128,10 @@ export class SplitPageComponent implements OnInit {
     const id = data["id"];
     const group: Group = {
       userId: id,
-      groupName: "SR Design",
-      count: 3,
-      emails: [
-        "prashantased@gmail.com",
-        "mark.robinson@utsa.edu",
-        "peter@gmail.com",
-      ],
-      names: ["Prashant Sedhain", "Mark Robinson", "Peter Parker"],
+      groupName: "Hawa Design",
+      count: this.selected,
+      emails: this.emailArray,
+      names: this.nameArray,
     };
     var jsonBody = JSON.stringify(group);
     this.groupService.createGroup(jsonBody);
@@ -213,7 +209,7 @@ export class SplitPageComponent implements OnInit {
       alert("Form is invalid");
       return;
     }
-    this.createGroup();
+    // this.createGroup();
     this.parseForm();
     this.addUser();
   }
