@@ -7,10 +7,10 @@
         <h2 class="header">
           How many people do you want to split the expense with?
         </h2>
-        <form [formGroup]="countryForm">
+        <form [formGroup]="groupForm">
           <mat-form-field>
             <mat-label>Please Select</mat-label>
-            <mat-select formControlName="country" id="country">
+            <mat-select formControlName="numOfPeople" id="numOfPeople">
               <mat-option *ngFor="let num of numbers" [value]="num">{{
                 num
               }}</mat-option>

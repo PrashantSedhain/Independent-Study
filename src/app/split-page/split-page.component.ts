@@ -94,7 +94,6 @@ export class SplitPageComponent implements OnInit {
 
     this.groupForm.controls["numOfPeople"].valueChanges.subscribe((value) => {
       this.selected = value;
-      console.log(value);
       this.createArray();
     });
   }
