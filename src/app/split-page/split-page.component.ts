@@ -4,6 +4,7 @@ import {
   FormGroupDirective,
   NgForm,
   Validators,
+  FormGroup,
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { CalculationService } from "../calculation.service";
@@ -51,13 +52,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./split-page.component.css"],
 })
 export class SplitPageComponent implements OnInit {
+  countryForm: FormGroup;
+  default: any;
+  numbers: Array<Number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   constructor(
     private calculationService: CalculationService,
     private snackBarService: SnackbarService,
     private router: Router,
     private groupService: GroupService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.countryForm = new FormGroup({
+      country: new FormControl(null),
+    });
+  }
   groupByID: Group;
   ListOfGroups: Array<Group>;
   userId: Test;
@@ -87,6 +95,7 @@ export class SplitPageComponent implements OnInit {
 
   public createArray() {
     this.numberSelected = true;
+    this.selected = this.countryForm.get("country").value;
     this.list = [];
     for (let i = 0; i < this.selected; i++) {
       this.list.push(1);
@@ -126,8 +135,10 @@ export class SplitPageComponent implements OnInit {
     this.loading = true;
     groupData.subscribe((data) => {
       this.groupByID = data.data;
-      console.log(this.groupByID.count);
-      this.selected = this.groupByID.count;
+      this.countryForm.controls["country"].setValue(this.groupByID.count, {
+        onlySelf: true,
+      });
+      this.createArray();
       this.loading = false;
     });
   }
