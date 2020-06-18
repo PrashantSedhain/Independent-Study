@@ -52,7 +52,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./split-page.component.css"],
 })
 export class SplitPageComponent implements OnInit {
-  countryForm: FormGroup;
+  groupForm: FormGroup;
   default: any;
   numbers: Array<Number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   constructor(
@@ -62,8 +62,8 @@ export class SplitPageComponent implements OnInit {
     private groupService: GroupService,
     private authService: AuthService
   ) {
-    this.countryForm = new FormGroup({
-      country: new FormControl(null),
+    this.groupForm = new FormGroup({
+      numOfPeople: new FormControl(null),
     });
   }
   groupByID: Group;
@@ -91,11 +91,17 @@ export class SplitPageComponent implements OnInit {
       this.ListOfGroups = data.data;
       this.loading = false;
     });
+
+    this.groupForm.controls["numOfPeople"].valueChanges.subscribe((value) => {
+      this.selected = value;
+      console.log(value);
+      this.createArray();
+    });
   }
 
   public createArray() {
     this.numberSelected = true;
-    this.selected = this.countryForm.get("country").value;
+    this.selected = this.groupForm.get("numOfPeople").value;
     this.list = [];
     for (let i = 0; i < this.selected; i++) {
       this.list.push(1);
@@ -135,7 +141,7 @@ export class SplitPageComponent implements OnInit {
     this.loading = true;
     groupData.subscribe((data) => {
       this.groupByID = data.data;
-      this.countryForm.controls["country"].setValue(this.groupByID.count, {
+      this.groupForm.controls["numOfPeople"].setValue(this.groupByID.count, {
         onlySelf: true,
       });
       this.createArray();
