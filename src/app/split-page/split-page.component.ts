@@ -128,10 +128,14 @@ export class SplitPageComponent implements OnInit {
     const id = data["id"];
     const group: Group = {
       userId: id,
-      groupName: "Apt 101",
-      count: this.emailArray.length,
-      emails: this.emailArray,
-      names: this.nameArray,
+      groupName: "SR Design",
+      count: 3,
+      emails: [
+        "prashantased@gmail.com",
+        "mark.robinson@utsa.edu",
+        "peter@gmail.com",
+      ],
+      names: ["Prashant Sedhain", "Mark Robinson", "Peter Parker"],
     };
     var jsonBody = JSON.stringify(group);
     this.groupService.createGroup(jsonBody);
@@ -140,7 +144,6 @@ export class SplitPageComponent implements OnInit {
   onReset() {
     // reset whole form back to initial state
     this.submitted = false;
-
     this.groupForm.reset();
     this.t.clear();
   }
@@ -169,7 +172,9 @@ export class SplitPageComponent implements OnInit {
       }
     }
   }
+
   findGroupByID(groupID) {
+    this.onReset();
     var groupData = this.groupService.findGroupByID(groupID);
     this.loading = true;
     groupData.subscribe((data) => {
@@ -179,12 +184,17 @@ export class SplitPageComponent implements OnInit {
       });
 
       if (this.t.length < this.groupByID.count) {
+        this.emailArray = this.groupByID.emails;
+        this.nameArray = this.groupByID.names;
         for (let i = this.t.length; i < this.groupByID.count; i++) {
           if (this.t.length < this.groupByID.count) {
             this.t.push(
               this.formBuilder.group({
-                name: ["", Validators.required],
-                email: ["", [Validators.required, Validators.email]],
+                name: [this.nameArray[i], Validators.required],
+                email: [
+                  this.emailArray[i],
+                  [Validators.required, Validators.email],
+                ],
               })
             );
           }
@@ -203,6 +213,7 @@ export class SplitPageComponent implements OnInit {
       alert("Form is invalid");
       return;
     }
+    this.createGroup();
     this.parseForm();
     this.addUser();
   }
