@@ -1,103 +1,254 @@
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-
-<div class="row">
-  <div class="col-sm-8">
-    <div class="container">
-      <div>
-        <h2 class="header">
-          How many people do you want to split the expense with?
-        </h2>
-        <form [formGroup]="groupForm">
-          <mat-form-field>
-            <mat-label>Please Select</mat-label>
-            <mat-select formControlName="numOfPeople" id="numOfPeople">
-              <mat-option *ngFor="let num of numbers" [value]="num">{{
-                num
-              }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </form>
-
-        <h2 *ngIf="numberSelected" class="header">
-          Please enter their information below:
-        </h2>
-
-        <div *ngFor="let item of list; let i = index">
-          <mat-form-field appearance="outline">
-            <input
-              matInput
-              placeholder="Full Name"
-              required
-              [(ngModel)]="nameArray[i]"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              [errorStateMatcher]="matcher"
-              placeholder="Ex. pat@example.com"
-              [(ngModel)]="emailArray[i]"
-            />
-            <mat-error
-              *ngIf="
-                emailFormControl.hasError('email') &&
-                !emailFormControl.hasError('required')
-              "
+<!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="container">
+        <div>
+          <h2 class="header">
+            How many people do you want to split the expense with?
+          </h2>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Please Select</mat-label>
+              <mat-select
+                formControlName="numOfPeople"
+                (change)="createArray($event)"
+                id="numOfPeople"
+              >
+                <mat-option *ngFor="let num of numbers" [value]="num">{{
+                  num
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <h2 *ngIf="numberSelected" class="header">
+            Please enter their information below:
+          </h2>
+          <div *ngIf="numberSelected">
+            <div
+              [formGroup]="members"
+              class="form-group"
+              *ngFor="let item of list; let i = index"
             >
-              Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+              <div>
+                <mat-form-field appearance="outline">
+                  <input
+                    matInput
+                    placeholder="Full Name"
+                    formControlName="name"
+                  />
+                </mat-form-field>
 
-        <button
-          (click)="addUser()"
-          *ngIf="numberSelected"
-          type="button"
-          class="btn btn-light"
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    [errorStateMatcher]="matcher"
+                    placeholder="Ex.pat@example.com"
+                    formControlName="email"
+                  />
+                  <mat-error
+                    *ngIf="
+                      emailFormControl.hasError('email') &&
+                      !emailFormControl.hasError('required')
+                    "
+                  >
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <button>Test</button>
+          <button
+            (click)="addUser()"
+            *ngIf="numberSelected"
+            type="button"
+            class="btn btn-light"
+          >
+            Continue
+          </button>
+          <button
+            (click)="createGroup()"
+            *ngIf="numberSelected"
+            type="button"
+            class="btn btn-light"
+          >
+            Create Group
+          </button>
+
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="list-group">
+        <a
+          href="#"
+          class="heading list-group-item list-group-item-action active"
         >
-          Continue
-        </button>
-        <button
-          (click)="createGroup()"
-          *ngIf="numberSelected"
-          type="button"
-          class="btn btn-light"
+          Select your group or create new
+          <span class="badge badge-light">5</span>
+        </a>
+        <a
+          class="list-group-item list-group-item-action"
+          *ngFor="let group of ListOfGroups"
+          id="{{ group._id }}"
+          (click)="findGroupByID(group._id)"
+          >{{ group.groupName }}</a
         >
-          Create Group
+
+        <br />
+        <p class="textClass">
+          Note: Selecting one of the groups above automatically takes you to the
+          split page for splitting amongst the group members in that particular
+          group.
+        </p>
+        <button
+          type="button"
+          class="btn btn-secondary glyphicon glyphicon-plus"
+        >
+          Create New
         </button>
-        <br />
-        <br />
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="list-group">
-      <a href="#" class="heading list-group-item list-group-item-action active">
-        Select your group or create new
-        <span class="badge badge-light">5</span>
-      </a>
-      <a
-        class="list-group-item list-group-item-action"
-        *ngFor="let group of ListOfGroups"
-        id="{{ group._id }}"
-        (click)="findGroupByID(group._id)"
-        >{{ group.groupName }}</a
-      >
+</form> -->
+<form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="container">
+        <div class="card m-3">
+          <h5 class="card-header">Fill in the details</h5>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Number of People</label>
+                <select
+                  formControlName="numOfPeople"
+                  class="form-control"
+                  (change)="onChangeTickets($event)"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.numOfPeople.errors
+                  }"
+                >
+                  <option value=""></option>
+                  <option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">{{
+                    i
+                  }}</option>
+                </select>
+                <div
+                  *ngIf="submitted && f.numOfPeople.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.numOfPeople.errors.required">
+                    Number of tickets is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngFor="let member of t.controls; let i = index"
+            class="list-group list-group-flush"
+          >
+            <div class="list-group-item">
+              <h5 class="card-title">Member {{ i + 1 }}</h5>
+              <div [formGroup]="member" class="form-row">
+                <div class="form-group col-6">
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    formControlName="name"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && member.controls.name.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && member.controls.name.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="member.controls.name.errors.required">
+                      Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-6">
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    formControlName="email"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': submitted && member.controls.email.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && member.controls.email.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="member.controls.email.errors.required">
+                      Email is required
+                    </div>
+                    <div *ngIf="member.controls.email.errors.email">
+                      Email must be a valid email address
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-primary mr-1">Continue</button>
+            <button
+              class="btn btn-secondary mr-1"
+              type="reset"
+              (click)="onReset()"
+            >
+              Reset
+            </button>
+            <button class="btn btn-secondary" type="button" (click)="onClear()">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="list-group">
+        <a
+          href="#"
+          class="heading list-group-item list-group-item-action active"
+        >
+          Select your group or create new
+          <span class="badge badge-light">5</span>
+        </a>
+        <a
+          class="list-group-item list-group-item-action"
+          *ngFor="let group of ListOfGroups"
+          id="{{ group._id }}"
+          (click)="findGroupByID(group._id)"
+          >{{ group.groupName }}</a
+        >
 
-      <br />
-      <p class="textClass">
-        Note: Selecting one of the groups above automatically takes you to the
-        split page for splitting amongst the group members in that particular
-        group.
-      </p>
-      <button type="button" class="btn btn-secondary glyphicon glyphicon-plus">
-        Create New
-      </button>
+        <br />
+        <p class="textClass">
+          Note: Selecting one of the groups above automatically takes you to the
+          split page for splitting amongst the group members in that particular
+          group.
+        </p>
+        <button
+          type="button"
+          class="btn btn-secondary glyphicon glyphicon-plus"
+        >
+          Create New
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</form>
