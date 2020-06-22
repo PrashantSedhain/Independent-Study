@@ -127,6 +127,16 @@
           <div class="card-body">
             <div class="form-row">
               <div class="form-group">
+                <label>Group Name</label>
+                <input
+                  type="text"
+                  formControlName="groupName"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': submitted && member.controls.name.errors
+                  }"
+                />
+                <br />
                 <label>Number of People</label>
                 <select
                   formControlName="numOfPeople"
@@ -146,7 +156,7 @@
                   class="invalid-feedback"
                 >
                   <div *ngIf="f.numOfPeople.errors.required">
-                    Number of tickets is required
+                    Number of members is required
                   </div>
                 </div>
               </div>
@@ -208,18 +218,18 @@
             <button
               class="btn btn-secondary mr-1"
               type="reset"
+              (click)="createNewGroup()"
+            >
+              Save Group
+            </button>
+            <button
+              class="btn btn-secondary mr-1"
+              type="reset"
               (click)="onReset()"
             >
               Reset
             </button>
 
-            <button
-              class="btn btn-secondary mr-1"
-              type="reset"
-              (click)="createGroup()"
-            >
-              Add Group
-            </button>
             <button class="btn btn-secondary" type="button" (click)="onClear()">
               Clear
             </button>
@@ -253,6 +263,7 @@
         <button
           type="button"
           class="btn btn-secondary glyphicon glyphicon-plus"
+          (click)="createNewGroup()"
         >
           Create New
         </button>

@@ -76,6 +76,7 @@ export class SplitPageComponent implements OnInit {
 
   ngOnInit() {
     this.groupForm = this.formBuilder.group({
+      groupName: ["", Validators.required],
       numOfPeople: ["", Validators.required],
       members: new FormArray([]),
     });
@@ -123,12 +124,13 @@ export class SplitPageComponent implements OnInit {
     return this.groupForm.controls;
   }
 
-  createGroup() {
+  createNewGroup() {
+    this.parseForm();
     var data = this.authService.getCurrentUserID();
     const id = data["id"];
     const group: Group = {
       userId: id,
-      groupName: "Hawa Design",
+      groupName: this.groupForm.controls.groupName.value,
       count: this.selected,
       emails: this.emailArray,
       names: this.nameArray,
@@ -209,7 +211,6 @@ export class SplitPageComponent implements OnInit {
       alert("Form is invalid");
       return;
     }
-    // this.createGroup();
     this.parseForm();
     this.addUser();
   }
