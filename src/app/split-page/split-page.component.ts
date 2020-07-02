@@ -177,6 +177,7 @@ export class SplitPageComponent implements OnInit {
     this.loading = true;
     groupData.subscribe((data) => {
       this.groupByID = data.data;
+      this.groupForm.controls["groupName"].setValue(this.groupByID.groupName);
       this.groupForm.controls["numOfPeople"].setValue(this.groupByID.count, {
         onlySelf: true,
       });
