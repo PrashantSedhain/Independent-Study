@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const groupSchema = mongoose.Schema({
+const expenseSchema = mongoose.Schema({
   userId: { type: String, require: true },
   count: { type: Number, require: true },
   groupName: { type: String, require: true },
@@ -11,4 +11,4 @@ const groupSchema = mongoose.Schema({
 
 groupSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model("Group", groupSchema);
+module.exports = mongoose.model("Expense", expenseSchema);
