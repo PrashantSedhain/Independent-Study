@@ -7,7 +7,6 @@ import {
   FormArray,
   FormBuilder,
 } from "@angular/forms";
-import { ErrorStateMatcher } from "@angular/material/core";
 import { CalculationService } from "../calculation.service";
 import { SnackbarService } from "../snackbar.service";
 import { Router } from "@angular/router";
@@ -137,6 +136,10 @@ export class SplitPageComponent implements OnInit {
     };
     var jsonBody = JSON.stringify(group);
     this.groupService.createGroup(jsonBody);
+
+    this.router
+      .navigateByUrl("/inputPage", { skipLocationChange: true })
+      .then(() => this.router.navigate(["/splitPage"]));
   }
 
   onReset() {
@@ -146,12 +149,10 @@ export class SplitPageComponent implements OnInit {
     this.t.clear();
   }
 
-  onClear() {
-    // clear errors and reset ticket fields
-    this.submitted = false;
-
-    this.t.reset();
+  hawa() {
+    console.log("Wahahahaa");
   }
+
   onChangeTickets(e) {
     const numberOfTickets = e.target.value || 0;
     this.selected = numberOfTickets;

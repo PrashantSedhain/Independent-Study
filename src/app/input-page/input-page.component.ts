@@ -16,6 +16,8 @@ interface Person {
   styleUrls: ["./input-page.component.css"],
 })
 export class InputPageComponent implements OnInit {
+  collectiveTitleAdded: boolean;
+  collectiveTitleOfExpense: String;
   titleOfExpense: String;
   userWhoPaid: String;
   amountPaid: Number;
@@ -29,6 +31,7 @@ export class InputPageComponent implements OnInit {
 
   ngOnInit() {
     this.users = this.calculationService.users;
+    this.collectiveTitleAdded = false;
   }
   selectedOptions() {
     // right now: ['1','3']
@@ -68,8 +71,16 @@ export class InputPageComponent implements OnInit {
   }
   onAddExpense() {
     var retVal = this.isValid();
+    if (
+      this.collectiveTitleOfExpense == null ||
+      this.collectiveTitleOfExpense == ""
+    ) {
+      this.snackBarService.openSnackBar("Title must be included", "Error");
+    } else {
+      this.collectiveTitleAdded = true;
+    }
 
-    if (retVal == 6) {
+    if (retVal == 6 && this.collectiveTitleAdded) {
       this.excludedPersons = this.selectedOptions();
       console.log(this.titleOfExpense);
       console.log(this.excludedPersons);
@@ -87,10 +98,7 @@ export class InputPageComponent implements OnInit {
       );
       this.clearFields();
     } else if (retVal == 1) {
-      this.snackBarService.openSnackBar(
-        "Title of expense cannot be empty",
-        "Error"
-      );
+      this.snackBarService.openSnackBar("Spent for cannot be empty", "Error");
     } else if (retVal == 2) {
       this.snackBarService.openSnackBar(
         "Amount paid cannot be negative",
