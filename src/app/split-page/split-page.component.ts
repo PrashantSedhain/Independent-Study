@@ -149,10 +149,6 @@ export class SplitPageComponent implements OnInit {
     this.t.clear();
   }
 
-  hawa() {
-    console.log("Wahahahaa");
-  }
-
   onChangeTickets(e) {
     const numberOfTickets = e.target.value || 0;
     this.selected = numberOfTickets;

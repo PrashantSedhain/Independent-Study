@@ -6,6 +6,8 @@ const user = require("./models/user");
 const groupRoutes = require("./routes/group");
 const userRoutes = require("./routes/user");
 const emailRoutes = require("./routes/email");
+const expenseRoutes = require("./routes/expense");
+
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
@@ -44,4 +46,6 @@ app.get("/", function (req, res) {
 app.use("/api/user", userRoutes);
 app.use("/email", emailRoutes);
 app.use("/api/group", groupRoutes);
+app.use("/api/expense", expenseRoutes);
+
 module.exports = app;

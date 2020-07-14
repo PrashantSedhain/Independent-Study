@@ -69,6 +69,7 @@ export class InputPageComponent implements OnInit {
       element.checked = false;
     });
   }
+
   onAddExpense() {
     var retVal = this.isValid();
     if (
@@ -79,13 +80,13 @@ export class InputPageComponent implements OnInit {
     } else {
       this.collectiveTitleAdded = true;
     }
-
+    var cnt = 0;
     if (retVal == 6 && this.collectiveTitleAdded) {
+      if (cnt == 0) {
+        cnt += 1;
+        this.calculationService.collectiveTitleOfExpense = this.collectiveTitleOfExpense;
+      }
       this.excludedPersons = this.selectedOptions();
-      console.log(this.titleOfExpense);
-      console.log(this.excludedPersons);
-      console.log(this.userWhoPaid);
-      console.log("Amount paid is " + this.amountPaid);
       this.calculationService.titleOfExpense = this.titleOfExpense;
       this.calculationService.excludedPersons = this.excludedPersons;
       this.calculationService.userWhoPaid = this.userWhoPaid;
