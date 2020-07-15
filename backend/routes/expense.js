@@ -5,16 +5,16 @@ const router = express.Router();
 const Expense = require("../models/expense");
 
 router.post("/create", (req, res, next) => {
-  // const usertoken = req.headers.authorization;
-  // const token = usertoken.split(" ");
-  // const decoded = jwt.verify(
-  //   token[1],
-  //   "secret_password_here_this_is_Temporary"
-  // );
-  // id = decoded["id"];
+  const usertoken = req.headers.authorization;
+  const token = usertoken.split(" ");
+  const decoded = jwt.verify(
+    token[1],
+    "secret_password_here_this_is_Temporary"
+  );
+  id = decoded["id"];
   const expense = new Expense({
     groupName: req.body.groupName,
-    userId: req.body.userId,
+    userId: this.id,
     expenseTitle: req.body.expenseTitle,
     expenses: req.body.expense,
   });
@@ -24,16 +24,16 @@ router.post("/create", (req, res, next) => {
 });
 
 router.put("/update", (req, res, next) => {
-  // const usertoken = req.headers.authorization;
-  // const token = usertoken.split(" ");
-  // const decoded = jwt.verify(
-  //   token[1],
-  //   "secret_password_here_this_is_Temporary"
-  // );
-  // uid = decoded["id"];
+  const usertoken = req.headers.authorization;
+  const token = usertoken.split(" ");
+  const decoded = jwt.verify(
+    token[1],
+    "secret_password_here_this_is_Temporary"
+  );
+  uid = decoded["id"];
   Expense.findOneAndUpdate(
     {
-      userId: req.body.userId,
+      userId: this.uid,
       groupName: req.body.groupName,
       expenseTitle: req.body.expenseTitle,
     },
