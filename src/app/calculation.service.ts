@@ -20,6 +20,7 @@ export class CalculationService {
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
+  currentlyClickedGroupName: String;
   keyGenerator: number = 0;
   collectiveTitleOfExpense: String;
   titleOfExpense: String;
@@ -105,6 +106,7 @@ export class CalculationService {
       expenseTitle: this.collectiveTitleOfExpense,
       expenses: [
         {
+          groupName: this.currentlyClickedGroupName,
           spentFor: this.titleOfExpense,
           amount: this.amountPaid,
           paidBy: this.userWhoPaid,

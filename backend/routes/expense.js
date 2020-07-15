@@ -5,17 +5,18 @@ const router = express.Router();
 const Expense = require("../models/expense");
 
 router.post("/create", (req, res, next) => {
-  const usertoken = req.headers.authorization;
-  const token = usertoken.split(" ");
-  const decoded = jwt.verify(
-    token[1],
-    "secret_password_here_this_is_Temporary"
-  );
-  id = decoded["id"];
+  // const usertoken = req.headers.authorization;
+  // const token = usertoken.split(" ");
+  // const decoded = jwt.verify(
+  //   token[1],
+  //   "secret_password_here_this_is_Temporary"
+  // );
+  // id = decoded["id"];
   const expense = new Expense({
-    userId: this.id,
+    groupName: req.body.groupName,
+    userId: req.body.userId,
     expenseTitle: req.body.expenseTitle,
-    expenses: req.body.expenses,
+    expenses: req.body.expense,
   });
   expense.save().then(() => {
     res.status(201).json({ message: "Expense Saved ", body: expense });
@@ -23,8 +24,19 @@ router.post("/create", (req, res, next) => {
 });
 
 router.put("/update", (req, res, next) => {
-  Expense.findByIdAndUpdate(
-    req.body.userId,
+  // const usertoken = req.headers.authorization;
+  // const token = usertoken.split(" ");
+  // const decoded = jwt.verify(
+  //   token[1],
+  //   "secret_password_here_this_is_Temporary"
+  // );
+  // uid = decoded["id"];
+  Expense.findOneAndUpdate(
+    {
+      userId: req.body.userId,
+      groupName: req.body.groupName,
+      expenseTitle: req.body.expenseTitle,
+    },
     { $push: { expenses: req.body.expense } },
     function (err, result) {
       if (err) {

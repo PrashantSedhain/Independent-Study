@@ -9,6 +9,7 @@ const { find } = require("lodash");
 
 router.post("/create", (req, res, next) => {
   const group = new Group({
+    
     userId: req.body.userId,
     count: req.body.count,
     names: req.body.names,

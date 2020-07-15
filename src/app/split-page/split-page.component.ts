@@ -13,6 +13,7 @@ import { Router } from "@angular/router";
 import { GroupService } from "../group.service";
 import { AuthService } from "../Auth/auth.service";
 import { groupBy } from "lodash";
+import { ExpenseService } from "../expense.service";
 
 interface Test {
   userID: string;
@@ -50,12 +51,14 @@ export class SplitPageComponent implements OnInit {
   numbers: Array<Number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   constructor(
     private calculationService: CalculationService,
+    private expenseService: ExpenseService,
     private snackBarService: SnackbarService,
     private router: Router,
     private groupService: GroupService,
     private authService: AuthService,
     private formBuilder: FormBuilder
   ) {}
+
   groupByID: Group;
   ListOfGroups: Array<Group>;
   userId: Test;
@@ -174,6 +177,10 @@ export class SplitPageComponent implements OnInit {
     this.loading = true;
     groupData.subscribe((data) => {
       this.groupByID = data.data;
+      this.calculationService.currentlyClickedGroupName = this.groupByID.groupName;
+      console.log(
+        "currently clicked " + this.calculationService.currentlyClickedGroupName
+      );
       this.groupForm.controls["groupName"].setValue(this.groupByID.groupName);
       this.groupForm.controls["numOfPeople"].setValue(this.groupByID.count, {
         onlySelf: true,
