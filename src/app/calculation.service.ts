@@ -104,9 +104,9 @@ export class CalculationService {
   createExpense() {
     const expense = {
       expenseTitle: this.collectiveTitleOfExpense,
+      groupName: this.currentlyClickedGroupName,
       expenses: [
         {
-          groupName: this.currentlyClickedGroupName,
           spentFor: this.titleOfExpense,
           amount: this.amountPaid,
           paidBy: this.userWhoPaid,
@@ -166,9 +166,10 @@ export class CalculationService {
     }
   }
   updateExpense() {
-    const expense = {
+    const body = {
       expenseTitle: this.collectiveTitleOfExpense,
-      expenses: [
+      groupName: this.currentlyClickedGroupName,
+      expense: [
         {
           spentFor: this.titleOfExpense,
           amount: this.amountPaid,
@@ -178,7 +179,7 @@ export class CalculationService {
       ],
     };
     this.http
-      .put(this.createExpenseURI, expense, { headers: this.headers })
+      .put(this.updateExpenseURI, body, { headers: this.headers })
       .subscribe((response) => {
         if (!response) {
           alert("Failed creating expense!");
