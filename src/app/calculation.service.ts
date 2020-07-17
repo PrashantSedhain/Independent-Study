@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { AuthService } from "./Auth/auth.service";
 
 interface Person {
   fullName: string;
@@ -40,7 +41,7 @@ export class CalculationService {
   getEmailsURI = "http://localhost:3000/email/getEmails";
   createExpenseURI = "http://localhost:3000/api/expense/create";
   updateExpenseURI = "http://localhost:3000/api/expense/update";
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   generateKeys() {
     this.keyGenerator = this.keyGenerator + 1;
@@ -102,10 +103,13 @@ export class CalculationService {
   }
 
   createExpense() {
+    var data = this.authService.getCurrentUserID();
+    const id = data["id"];
     const expense = {
+      userId: id,
       expenseTitle: this.collectiveTitleOfExpense,
       groupName: this.currentlyClickedGroupName,
-      expenses: [
+      expense: [
         {
           spentFor: this.titleOfExpense,
           amount: this.amountPaid,
@@ -166,7 +170,10 @@ export class CalculationService {
     }
   }
   updateExpense() {
+    var data = this.authService.getCurrentUserID();
+    const id = data["id"];
     const body = {
+      userId: id,
       expenseTitle: this.collectiveTitleOfExpense,
       groupName: this.currentlyClickedGroupName,
       expense: [

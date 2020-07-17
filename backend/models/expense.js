@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const expenseSchema = mongoose.Schema({
-  groupName: {type: String, require: true},
+  groupName: { type: String, require: true, unique: true },
   expenseTitle: { type: String, require: true, unique: true },
   userId: { type: String, require: true },
   expenses: [
