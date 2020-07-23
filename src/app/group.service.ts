@@ -19,7 +19,8 @@ export class GroupService {
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
-  uri = "http://localhost:3000/api/group/";
+  uri = "https://fast-cove-16602.herokuapp.com/api/group";
+  // uri = "http://localhost:3000/api/group/";
   constructor(
     private http: HttpClient,
     private snackBarService: SnackbarService
@@ -39,13 +40,15 @@ export class GroupService {
 
   findGroups(): Observable<{ data: any }> {
     return this.http.get<{ data: any }>(
-      "http://localhost:3000/api/group/findGroups"
+      // "http://localhost:3000/api/group/findGroups"
+      "https://fast-cove-16602.herokuapp.com/api/group/findGroups"
     );
   }
 
   findGroupByID(id): Observable<{ data: any }> {
     return this.http.get<{ data: any }>(
-      `http://localhost:3000/api/group/findGroupByID/${id}`
+      // `http://localhost:3000/api/group/findGroupByID/${id}`
+      `https://fast-cove-16602.herokuapp.com/api/group/findGroupByID/${id}`
     );
   }
 }

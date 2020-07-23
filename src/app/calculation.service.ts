@@ -37,10 +37,15 @@ export class CalculationService {
   emailToBeSentToServer = {};
   moneyToPay: number;
   expenseAdded: Number = 0;
-  uri = "http://localhost:3000/email/sendEmails";
-  getEmailsURI = "http://localhost:3000/email/getEmails";
-  createExpenseURI = "http://localhost:3000/api/expense/create";
-  updateExpenseURI = "http://localhost:3000/api/expense/update";
+  // uri = "http://localhost:3000/email/sendEmails";
+  // getEmailsURI = "http://localhost:3000/email/getEmails";
+  // createExpenseURI = "http://localhost:3000/api/expense/create";
+  // updateExpenseURI = "http://localhost:3000/api/expense/update";
+
+  uri = "https://fast-cove-16602.herokuapp.com/email/sendEmails";
+  getEmailsURI = "https://fast-cove-16602.herokuapp.com/email/getEmails";
+  createExpenseURI = "https://fast-cove-16602.herokuapp.com/api/expense/create";
+  updateExpenseURI = "https://fast-cove-16602.herokuapp.com/api/expense/update";
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   generateKeys() {
