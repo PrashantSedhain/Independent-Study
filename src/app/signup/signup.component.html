@@ -12,33 +12,101 @@
     <div class="row">
       <div class="col-md-4 login-sec">
         <h2 class="text-center">Signup Now</h2>
-        <form class="login-form">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-            <input type="text" class="form-control" placeholder="" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              placeholder=""
+            />
+          </div>
+          <div *ngFor="let error of error_messages.email">
+            <mat-error
+              *ngIf="
+                signupForm.get('email').hasError(error.type) &&
+                (signupForm.get('email').dirty ||
+                  signupForm.get('email').touched)
+              "
+            >
+              {{ error.message }}
+            </mat-error>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1" class="text-uppercase"
               >Password</label
             >
-            <input type="password" class="form-control" placeholder="" />
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              placeholder=""
+            />
+          </div>
+          <div *ngFor="let error of error_messages.password">
+            <mat-error
+              *ngIf="
+                signupForm.get('password').hasError(error.type) &&
+                (signupForm.get('password').dirty ||
+                  signupForm.get('password').touched)
+              "
+            >
+              {{ error.message }}
+            </mat-error>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1" class="text-uppercase"
               >Confirm Password</label
             >
-            <input type="password" class="form-control" placeholder="" />
+            <input
+              type="password"
+              class="form-control"
+              formControlName="confirmpassword"
+              placeholder=""
+            />
+          </div>
+          <div *ngFor="let error of error_messages.confirmpassword">
+            <mat-error
+              *ngIf="
+                signupForm.get('confirmpassword').hasError(error.type) &&
+                (signupForm.get('confirmpassword').dirty ||
+                  signupForm.get('confirmpassword').touched)
+              "
+            >
+              {{ error.message }}
+            </mat-error>
           </div>
 
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" />
+              <input
+                type="checkbox"
+                formControlName="acceptTerms"
+                class="form-check-input"
+              />
               <small
                 >By checking the box, you agree to comply with our terms and
                 conditions.</small
               >
             </label>
-            <button type="submit" class="btn btn-login float-right">
+            <div *ngFor="let error of error_messages.acceptTerms">
+              <mat-error
+                *ngIf="
+                  signupForm.get('acceptTerms').hasError(error.type) &&
+                  (signupForm.get('acceptTerms').dirty ||
+                    signupForm.get('acceptTerms').touched)
+                "
+              >
+                {{ error.message }}
+              </mat-error>
+            </div>
+            <button
+              type="submit"
+              value="Sign Up"
+              class="btn btn-login float-right form-control"
+              [disabled]="!signupForm.valid"
+            >
               Submit
             </button>
           </div>
@@ -72,9 +140,10 @@
                     Split-App
                   </h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    Split app helps you to split your bills and organize your
+                    monthly expenses. You can always go back and look what you
+                    spent last month or even few months ago to keep tally of
+                    your monthly expenses.
                   </p>
                 </div>
               </div>

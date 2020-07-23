@@ -10,6 +10,6 @@ export class SnackbarService {
       duration: 4000,
     });
   }
-
+  
   constructor(private _snackBar: MatSnackBar) {}
 }

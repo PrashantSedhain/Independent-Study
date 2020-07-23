@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const user = require("./models/user");
 
-const userRouts = require("./routes/user");
+const groupRoutes = require("./routes/group");
+const userRoutes = require("./routes/user");
+const emailRoutes = require("./routes/email");
+const expenseRoutes = require("./routes/expense");
+
 const app = express();
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
@@ -26,16 +30,22 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
 
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, PUT, POST, PATCH, DELETE, OPTIONS"
   );
   next();
 });
+app.get("/", function (req, res) {
+  res.render("index");
+});
 
-app.use("/api/user", userRouts);
+app.use("/api/user", userRoutes);
+app.use("/email", emailRoutes);
+app.use("/api/group", groupRoutes);
+app.use("/api/expense", expenseRoutes);
 
 module.exports = app;

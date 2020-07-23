@@ -16,6 +16,8 @@ interface Person {
   styleUrls: ["./input-page.component.css"],
 })
 export class InputPageComponent implements OnInit {
+  collectiveTitleAdded: boolean;
+  collectiveTitleOfExpense: String;
   titleOfExpense: String;
   userWhoPaid: String;
   amountPaid: Number;
@@ -29,6 +31,7 @@ export class InputPageComponent implements OnInit {
 
   ngOnInit() {
     this.users = this.calculationService.users;
+    this.collectiveTitleAdded = false;
   }
   selectedOptions() {
     // right now: ['1','3']
@@ -66,15 +69,24 @@ export class InputPageComponent implements OnInit {
       element.checked = false;
     });
   }
+
   onAddExpense() {
     var retVal = this.isValid();
-
-    if (retVal == 6) {
+    if (
+      this.collectiveTitleOfExpense == null ||
+      this.collectiveTitleOfExpense == ""
+    ) {
+      this.snackBarService.openSnackBar("Title must be included", "Error");
+    } else {
+      this.collectiveTitleAdded = true;
+    }
+    var cnt = 0;
+    if (retVal == 6 && this.collectiveTitleAdded) {
+      if (cnt == 0) {
+        cnt += 1;
+        this.calculationService.collectiveTitleOfExpense = this.collectiveTitleOfExpense;
+      }
       this.excludedPersons = this.selectedOptions();
-      console.log(this.titleOfExpense);
-      console.log(this.excludedPersons);
-      console.log(this.userWhoPaid);
-      console.log("Amount paid is " + this.amountPaid);
       this.calculationService.titleOfExpense = this.titleOfExpense;
       this.calculationService.excludedPersons = this.excludedPersons;
       this.calculationService.userWhoPaid = this.userWhoPaid;
@@ -87,10 +99,7 @@ export class InputPageComponent implements OnInit {
       );
       this.clearFields();
     } else if (retVal == 1) {
-      this.snackBarService.openSnackBar(
-        "Title of expense cannot be empty",
-        "Error"
-      );
+      this.snackBarService.openSnackBar("Spent for cannot be empty", "Error");
     } else if (retVal == 2) {
       this.snackBarService.openSnackBar(
         "Amount paid cannot be negative",

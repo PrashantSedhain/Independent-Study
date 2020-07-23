@@ -1,10 +1,22 @@
 <div class="container">
-  <h2 class="header">Enter the title:</h2>
+  <div *ngIf="!collectiveTitleAdded">
+    <h2 class="header">Provide one time title of Expenditures:</h2>
+    <input
+      class="form-control"
+      placeholder="Ex: Monthly Calculation"
+      type="text"
+      id="example-number-input1"
+      name="collectiveTitleOfExpense"
+      [(ngModel)]="collectiveTitleOfExpense"
+    />
+  </div>
+
+  <h2 class="header">Spent For:</h2>
   <input
     class="form-control"
     placeholder="Ex: HEB Shopping"
     type="text"
-    id="example-number-input"
+    id="example-number-input2"
     name="titleOfExpense"
     [(ngModel)]="titleOfExpense"
   />

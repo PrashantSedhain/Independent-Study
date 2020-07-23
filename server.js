@@ -1,5 +1,7 @@
 const http = require("http");
 const app = require("./backend/app");
+const express = require("express");
+const path = require("path");
 
 const normalizePort = (val) => {
   var port = parseInt(val, 10);
@@ -23,6 +25,14 @@ const onListening = () => {
 
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
+
+// Serve static files....
+app.use(express.static(__dirname + "/dist/splitwise"));
+
+// Send all requests to index.html
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/splitwise/index.html"));
+});
 
 const server = http.createServer(app);
 server.on("listening", onListening);

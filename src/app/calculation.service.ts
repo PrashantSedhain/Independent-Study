@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { AuthService } from "./Auth/auth.service";
 
 interface Person {
   fullName: string;
@@ -12,6 +13,7 @@ interface Report {
   amountPaid: Number;
   paidBy: String;
 }
+
 @Injectable({
   providedIn: "root",
 })
@@ -19,7 +21,9 @@ export class CalculationService {
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
+  currentlyClickedGroupName: String;
   keyGenerator: number = 0;
+  collectiveTitleOfExpense: String;
   titleOfExpense: String;
   userWhoPaid: String;
   amountPaid: any;
@@ -32,9 +36,12 @@ export class CalculationService {
   bodyToBeSentToServer = {};
   emailToBeSentToServer = {};
   moneyToPay: number;
-  uri = "http://localhost:5000/sendEmails";
-  getEmailsURI = "http://localhost:5000/getEmails";
-  constructor(private http: HttpClient) {}
+  expenseAdded: Number = 0;
+  uri = "http://localhost:3000/email/sendEmails";
+  getEmailsURI = "http://localhost:3000/email/getEmails";
+  createExpenseURI = "http://localhost:3000/api/expense/create";
+  updateExpenseURI = "http://localhost:3000/api/expense/update";
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   generateKeys() {
     this.keyGenerator = this.keyGenerator + 1;
@@ -94,12 +101,37 @@ export class CalculationService {
 
     return excludedPersonAsString;
   }
+
+  // createExpense() {
+  //   var data = this.authService.getCurrentUserID();
+  //   const id = data["id"];
+  //   const expense = {
+  //     userId: id,
+  //     expenseTitle: this.collectiveTitleOfExpense,
+  //     groupName: this.currentlyClickedGroupName,
+  //     expense: [
+  //       {
+  //         spentFor: this.titleOfExpense,
+  //         amount: this.amountPaid,
+  //         paidBy: this.userWhoPaid,
+  //         excludedPersons: this.excludedPersons,
+  //       },
+  //     ],
+  //   };
+  //   this.http
+  //     .post(this.createExpenseURI, expense, { headers: this.headers })
+  //     .subscribe((response) => {
+  //       if (!response) {
+  //         alert("Failed creating expense!");
+  //       }
+  //     });
+  // }
+
   performCalculation() {
     //add the expense to report for report generation.
     var exPersonAsString: string = "None";
     const divNumber = this.users.length - this.excludedPersons.length;
     const amountOwed = this.amountPaid / divNumber;
-    const test = this.userWhoPaid;
     this.users.forEach((user) => {
       var isExcluded = false;
 
@@ -129,8 +161,38 @@ export class CalculationService {
       paidBy: this.userWhoPaid,
     };
     this.totalReport.push(item);
-    console.log(this.users);
+
+    // if (this.expenseAdded == 0) {
+    //   this.createExpense();
+    //   this.expenseAdded = 1;
+    // } else {
+    //   this.updateExpense();
+    // }
   }
+  // updateExpense() {
+  //   var data = this.authService.getCurrentUserID();
+  //   const id = data["id"];
+  //   const body = {
+  //     userId: id,
+  //     expenseTitle: this.collectiveTitleOfExpense,
+  //     groupName: this.currentlyClickedGroupName,
+  //     expense: [
+  //       {
+  //         spentFor: this.titleOfExpense,
+  //         amount: this.amountPaid,
+  //         paidBy: this.userWhoPaid,
+  //         excludedPersons: this.excludedPersons,
+  //       },
+  //     ],
+  //   };
+  //   this.http
+  //     .put(this.updateExpenseURI, body, { headers: this.headers })
+  //     .subscribe((response) => {
+  //       if (!response) {
+  //         alert("Failed creating expense!");
+  //       }
+  //     });
+  // }
 
   performFinalCalculation(): [] {
     var i = 0;
