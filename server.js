@@ -24,6 +24,14 @@ const onListening = () => {
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
+// Serve static files....
+app.use(express.static(__dirname + "/dist/splitwise"));
+
+// Send all requests to index.html
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/splitwise/index.html"));
+});
+
 const server = http.createServer(app);
 server.on("listening", onListening);
 server.listen(port);

@@ -102,30 +102,30 @@ export class CalculationService {
     return excludedPersonAsString;
   }
 
-  createExpense() {
-    var data = this.authService.getCurrentUserID();
-    const id = data["id"];
-    const expense = {
-      userId: id,
-      expenseTitle: this.collectiveTitleOfExpense,
-      groupName: this.currentlyClickedGroupName,
-      expense: [
-        {
-          spentFor: this.titleOfExpense,
-          amount: this.amountPaid,
-          paidBy: this.userWhoPaid,
-          excludedPersons: this.excludedPersons,
-        },
-      ],
-    };
-    this.http
-      .post(this.createExpenseURI, expense, { headers: this.headers })
-      .subscribe((response) => {
-        if (!response) {
-          alert("Failed creating expense!");
-        }
-      });
-  }
+  // createExpense() {
+  //   var data = this.authService.getCurrentUserID();
+  //   const id = data["id"];
+  //   const expense = {
+  //     userId: id,
+  //     expenseTitle: this.collectiveTitleOfExpense,
+  //     groupName: this.currentlyClickedGroupName,
+  //     expense: [
+  //       {
+  //         spentFor: this.titleOfExpense,
+  //         amount: this.amountPaid,
+  //         paidBy: this.userWhoPaid,
+  //         excludedPersons: this.excludedPersons,
+  //       },
+  //     ],
+  //   };
+  //   this.http
+  //     .post(this.createExpenseURI, expense, { headers: this.headers })
+  //     .subscribe((response) => {
+  //       if (!response) {
+  //         alert("Failed creating expense!");
+  //       }
+  //     });
+  // }
 
   performCalculation() {
     //add the expense to report for report generation.
@@ -162,37 +162,37 @@ export class CalculationService {
     };
     this.totalReport.push(item);
 
-    if (this.expenseAdded == 0) {
-      this.createExpense();
-      this.expenseAdded = 1;
-    } else {
-      this.updateExpense();
-    }
+    // if (this.expenseAdded == 0) {
+    //   this.createExpense();
+    //   this.expenseAdded = 1;
+    // } else {
+    //   this.updateExpense();
+    // }
   }
-  updateExpense() {
-    var data = this.authService.getCurrentUserID();
-    const id = data["id"];
-    const body = {
-      userId: id,
-      expenseTitle: this.collectiveTitleOfExpense,
-      groupName: this.currentlyClickedGroupName,
-      expense: [
-        {
-          spentFor: this.titleOfExpense,
-          amount: this.amountPaid,
-          paidBy: this.userWhoPaid,
-          excludedPersons: this.excludedPersons,
-        },
-      ],
-    };
-    this.http
-      .put(this.updateExpenseURI, body, { headers: this.headers })
-      .subscribe((response) => {
-        if (!response) {
-          alert("Failed creating expense!");
-        }
-      });
-  }
+  // updateExpense() {
+  //   var data = this.authService.getCurrentUserID();
+  //   const id = data["id"];
+  //   const body = {
+  //     userId: id,
+  //     expenseTitle: this.collectiveTitleOfExpense,
+  //     groupName: this.currentlyClickedGroupName,
+  //     expense: [
+  //       {
+  //         spentFor: this.titleOfExpense,
+  //         amount: this.amountPaid,
+  //         paidBy: this.userWhoPaid,
+  //         excludedPersons: this.excludedPersons,
+  //       },
+  //     ],
+  //   };
+  //   this.http
+  //     .put(this.updateExpenseURI, body, { headers: this.headers })
+  //     .subscribe((response) => {
+  //       if (!response) {
+  //         alert("Failed creating expense!");
+  //       }
+  //     });
+  // }
 
   performFinalCalculation(): [] {
     var i = 0;
