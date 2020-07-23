@@ -54,7 +54,7 @@ export class AuthService {
       password: password,
     };
     this.http
-      .post("http://localhost:3000/api/user/signup", authData, {
+      .post("https://fast-cove-16602.herokuapp.com/api/user/signup", authData, {
         headers: this.headers,
       })
       .subscribe(
@@ -75,7 +75,7 @@ export class AuthService {
     };
     this.http
       .post<{ token: string; expiresIn: number }>(
-        "http://localhost:3000/api/user/login",
+        "https://fast-cove-16602.herokuapp.com/api/user/login",
         authData,
         { headers: this.headers }
       )
@@ -158,12 +158,12 @@ export class AuthService {
 
   public getUserDetails(id: string): Observable<UserDetails> {
     return this.http.get<UserDetails>(
-      "http://localhost:3000/api/user/getUserDetails/" + id
+      "https://fast-cove-16602.herokuapp.com/api/user/getUserDetails/" + id
     );
   }
   public getcurrentUserDetails(): Observable<CurrentUserDetails> {
     return this.http.get<CurrentUserDetails>(
-      "http://localhost:3000/api/user/getCurrentUserDetails"
+      "https://fast-cove-16602.herokuapp.com/api/user/getCurrentUserDetails"
     );
   }
   public getCurrentUserID(): currentUserID {
@@ -180,9 +180,12 @@ export class AuthService {
   }
 
   public updatePost(info, location) {
-    return this.http.put("http://localhost:3000/api/user/updateProfile", {
-      info: info,
-      location: location,
-    });
+    return this.http.put(
+      "https://fast-cove-16602.herokuapp.com/api/user/updateProfile",
+      {
+        info: info,
+        location: location,
+      }
+    );
   }
 }
